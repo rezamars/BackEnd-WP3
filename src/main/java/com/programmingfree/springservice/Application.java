@@ -26,6 +26,7 @@ public class Application {
 		DBService service = new DBService();
 		String message = service.createAndInitDB();
 		System.out.println(message);
+		//This is just a test comment
 	}
 
 }
