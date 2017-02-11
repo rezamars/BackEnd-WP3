@@ -6,18 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service("stationService")
+@Service("dataService")
 @Transactional
-public class StationServiceImpl implements StationService{
+public class WDataServiceImpl implements WDataService{
 
 	@Autowired
-    private WeatherStationRepository weatherRepository;
+    private WeatherDataRepository weatherDataRepository;
 	
 	@Override
-	public List<Station> findAllStations() {
-		return weatherRepository.findAll();
+	public List<WeatherData> findAllDatas() {
+		return weatherDataRepository.findAll();
 	}
-
-
 
 }

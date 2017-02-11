@@ -2,9 +2,11 @@ package com.programmingfree.springservice;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,6 +17,12 @@ public class WeatherData {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="data_id")
 	private int id;
+	
+	@Column(name="station_SMHI_id")
+	private int smhiID;
+	
+	@Column(name="station_name")
+	private String stationName;
 		
 	@Column(name="date")
 	private String date;
@@ -46,8 +54,8 @@ public class WeatherData {
 	@Column(name="air_pressure")
 	private int airPressure ;
 	
-	@Column(name="downfall")
-	private double downFall ;
+	@Column(name="precipitation")
+	private double precipitation ;
 
 	public int getId() {
 		return id;
@@ -55,6 +63,22 @@ public class WeatherData {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getSmhiID() {
+		return smhiID;
+	}
+
+	public void setSmhiID(int smhiID) {
+		this.smhiID = smhiID;
+	}
+
+	public String getStationName() {
+		return stationName;
+	}
+
+	public void setStationName(String stationName) {
+		this.stationName = stationName;
 	}
 
 	public String getDate() {
@@ -137,13 +161,15 @@ public class WeatherData {
 		this.airPressure = airPressure;
 	}
 
-	public double getDownFall() {
-		return downFall;
+	public double getPrecipitation() {
+		return precipitation;
 	}
 
-	public void setDownFall(double downFall) {
-		this.downFall = downFall;
+	public void setPrecipitation(double precipitation) {
+		this.precipitation = precipitation;
 	}
+
+	
 	
 	
 }

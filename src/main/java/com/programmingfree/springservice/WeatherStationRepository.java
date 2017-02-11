@@ -9,7 +9,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface WeatherRepository extends JpaRepository<Station, Integer> {
+public interface WeatherStationRepository extends JpaRepository<Station, Integer> {
 
 	//List<Station> findAllStations(@Param("station_ID") int id);
 	//List<Station> findByTaskStatus(@Param("status") String taskStatus);

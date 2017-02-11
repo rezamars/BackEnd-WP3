@@ -16,6 +16,9 @@ public class RestApiController {
 	@Autowired
 	StationService stationService;
 	
+	@Autowired
+	WDataService dataService;
+	
 	@RequestMapping(value = "/station/", method = RequestMethod.GET)
     public ResponseEntity<List<Station>> listAllStations() {
         List<Station> stations = stationService.findAllStations();
@@ -24,6 +27,16 @@ public class RestApiController {
             // You many decide to return HttpStatus.NOT_FOUND
         }
         return new ResponseEntity<List<Station>>(stations, HttpStatus.OK);
+    }
+	
+	@RequestMapping(value = "/weatherdata/", method = RequestMethod.GET)
+    public ResponseEntity<List<WeatherData>> listAllData() {
+        List<WeatherData> datas = dataService.findAllDatas();
+        if (datas.isEmpty()) {
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+            // You many decide to return HttpStatus.NOT_FOUND
+        }
+        return new ResponseEntity<List<WeatherData>>(datas, HttpStatus.OK);
     }
 	
 	

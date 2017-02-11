@@ -23,7 +23,7 @@ public class Application {
 		
 		
 		SpringApplication.run(Application.class, args);	
-		DBService2 service = new DBService2();
+		DBService3 service = new DBService3();
 		//String message = service.createAndInitDB();
 		//System.out.println(message);
 		//This is just a test comment

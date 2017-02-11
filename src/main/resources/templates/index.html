@@ -1,25 +1,213 @@
-<html >
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>AngularJS Task Manager</title>
-<link href='./css/style.css' rel="stylesheet" type="text/css" />
-<link href='./css/css/font-awesome.css' rel="stylesheet" type="text/css" />
-<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular-route.min.js"></script>
-<script type="text/javascript" src="./js/app.js"></script>
+    <meta charset="UTF-8">
+    <title>Homepage</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular-route.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    
+
+
+    <script type="text/javascript" src="./js/app.js"></script>
+    
+
+
+
+    <!-- Skapa tabell och sökfunktion med filtrering/sortering med checkbox-->
 
 </head>
 <body>
-<div ng-app="myApp" ng-controller="myCtrl">
-<select ng-model="selectedName" ng-options="x for x in arrStations">
-{{x}}
-</select>
+
+
+
+<header>
+    <h1>SMHI tabell</h1>
+    <button class="btn btn-default" type="logout">Logout</button>
+    <button class="btn btn-default" type="clear">CLEAR</button>
+</header>
+
+<div ng-app="myWeatherApp">
+<!--checkbox-->
+<form action="">
+    <div class="checkbox-form">
+
+        <input type="checkbox" name="weatherData" value="temp">Temperature
+        <input type="checkbox" name="weatherData" value="humidity">Humidity
+        <input type="checkbox" name="weatherData" value="windVelocity">Wind Velocity
+        <input type="checkbox" name="weatherData" value="windDirection">Wind Direction
+        <input type="checkbox" name="weatherData" value="cloudAltitude">Cloud Altitude
+        <input type="checkbox" name="weatherData" value="cloudCoverage">Cloud Coverage
+        <input type="checkbox" name="weatherData" value="cloudTypes">Cloud Types
+        <input type="checkbox" name="weatherData" value="airPressure">Air Pressure
+        <input type="checkbox" name="weatherData" value="precipitation">Precipitation
+
+    </div>
+</form>
+
+
+<div class="container" ng-app="sortApp" ng-controller="mainController">
+
+    <div class="alert alert-info">
+        <p>Sort Type: {{ sortType }}</p>
+        <p>Sort Reverse: {{ sortReverse }}</p>
+        <p>Search Query: {{ searchStationId }}</p>
+    </div>
+
+    <form>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-add-on"><i class="fa fa-search"></i></div>
+                <input type="text" id="search1" placeholder="Search StationId" ng-model="searchStationId">
+
+                <input type="radio" id="radio-station-id"name="StationId" value="stationId"> Station Id
+                <input type="radio" id="radio-station-name"name="StationName" value="stationName"> Station Name <br>
+
+            </div>
+        </div>
+    </form>
+    <table class="table table-bordered table-striped">
+
+
+        <thead>
+        <tr>
+            <td>
+                <a href="#" ng-click="sortType = 'stationId'; sortReverse = !sortReverse">
+                    Station Id
+                    <span ng-show="sortType == 'stationId' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'stationId' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+            </td>
+            <td>
+                <a href="#" ng-click="sortType = 'stationName'; sortReverse = !sortReverse">
+                    Station Name
+                    <span ng-show="sortType == 'stationName' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'stationName' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+            </td>
+            <td>
+                <a href="#" ng-click="sortType = 'date'; sortReverse = !sortReverse">
+                    Date
+                    <span ng-show="sortType == 'date' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'date' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+            </td>
+            <td>
+                <a href="#" ng-click="sortType = 'time'; sortReverse = !sortReverse">
+                    Time
+                    <span ng-show="sortType == 'time' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'time' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+            </td>
+            <td>
+                <a href="#" ng-click="sortType = 'temperature'; sortReverse = !sortReverse">
+                    Temperature
+                    <span ng-show="sortType == 'temperature' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'temperature' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+            </td>
+            <td>
+                <a href="#" ng-click="sortType = 'humidity'; sortReverse = !sortReverse">
+                    Humidity
+                    <span ng-show="sortType == 'humidity' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'humidity' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+            </td>
+            <td>
+                <a href="#" ng-click="sortType = 'wind'; sortReverse = !sortReverse">
+                    Wind
+                    <span ng-show="sortType == 'wind' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'wind' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+            </td>
+            <td>
+                <a href="#" ng-click="sortType = 'wind-direction'; sortReverse = !sortReverse">
+                    Wind Direction
+                    <span ng-show="sortType == 'wind-direction' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'wind-direction' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+            </td>
+            <td>
+                <a href="#" ng-click="sortType = 'cloud-altitude'; sortReverse = !sortReverse">
+                    Cloud Altitude
+                    <span ng-show="sortType == 'cloud-altitude' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'cloud-altitude' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+            </td>
+            <td>
+                <a href="#" ng-click="sortType = 'cloud-coverage'; sortReverse = !sortReverse">
+                    Cloud Coverage
+                    <span ng-show="sortType == 'cloud-coverage' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'cloud-coverage' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+            </td>
+            <td>
+                <a href="#" ng-click="sortType = 'cloud-types'; sortReverse = !sortReverse">
+                    Cloud Types
+                    <span ng-show="sortType == 'cloud-types' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'cloud-types' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+            </td>
+            <td>
+                <a href="#" ng-click="sortType = 'air-pressure'; sortReverse = !sortReverse">
+                    Air Pressure
+                    <span ng-show="sortType == 'air-pressure' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'air-pressure' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+            </td>
+            <td>
+                <a href="#" ng-click="sortType = 'precipitation'; sortReverse = !sortReverse">
+                    Precipitation
+                    <span ng-show="sortType == 'precipitation' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'precipitation' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+            </td>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr ng-repeat="station in stationDataList | orderBy:sortType:sortReverse | filter:searchStationName">
+            <td>{{ station.smhiID }}</td>
+            <td>{{ station.stationName }}</td>
+            <td>{{ station.date }}</td>
+            <td>{{ station.time }}</td>
+            <td>{{ station.temperature }} (C)</td>
+            <td>{{ station.humidity }} (%)</td>
+            <td>{{ station.wind }} (M/s)</td>
+            <td>{{ station.windDirection }}</td>
+            <td>{{ station.cloudAltitude }} (M)</td>
+            <td>{{ station.cloudCoverage }} (%)</td>
+            <td>{{ station.cloudTypes }}</td>
+            <td>{{ station.airPressure }} (mBar)</td>
+            <td>{{ station.precipitation }}(ml)</td>
+        </tr>
+        </tbody>
+
+    </table>
+
 </div>
 
 
-<p>This example shows how to fill a dropdown list using the ng-options directive.</p>
+<!--<table style="width:100%">
+    <tr>
+        <th>Station id</th>
+        <th>Stationsname</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Temperature</th>
+        <th>Humidity</th>
+        <th>Wind</th>
+        <th>Wind Direction</th>
+        <th>Cloud Altitude</th>
+        <th>Cloud Coverage</th>
+        <th>Cloud Types</th>
+        <th>Air Pressure</th>
+        <th>Precipitation</th>
+    </tr>
 
-<a href="check.html">check</a>
+</table>-->
+
+</div>
 </body>
 </html>

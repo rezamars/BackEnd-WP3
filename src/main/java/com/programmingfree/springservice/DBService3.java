@@ -13,7 +13,7 @@ import javax.persistence.Persistence;
 
 
 
-public class DBService2 {
+public class DBService3 {
 	
 private String message = "ERROR!";
 	
@@ -31,13 +31,11 @@ private String message = "ERROR!";
 	  cal.setTime(date); // sets calendar time/date
 	  cal.add(Calendar.HOUR_OF_DAY, 3); // adds one hour
       
-      Station station = new Station();
-      station.setId(0);
-      station.setStationName("Göteborg-1");
-      station.setStationID(1);
       
       WeatherData wd = new WeatherData();
       wd.setId(0);
+      wd.setSmhiID(1);
+      wd.setStationName("Göteborg-1");
       wd.setDate("2017-02-08");
       wd.setTime("10.30");
       wd.setTemperature(20);
@@ -48,19 +46,13 @@ private String message = "ERROR!";
       wd.setCloudCoverage((byte)12);
       wd.setCloudTypes("Cirrus");
       wd.setAirPressure(1014);
-      wd.setPrecipitation(12);;
+      wd.setPrecipitation(12);
       
-      List<WeatherData> dataList = new ArrayList<WeatherData>();
-      dataList.add(wd);
-      station.setDataList(dataList);
-      
-      Station station2 = new Station();
-      station2.setId(0);
-      station2.setStationName("Göteborg-2");
-      station2.setStationID(2);
       
       WeatherData wd2 = new WeatherData();
       wd2.setId(0);
+      wd2.setSmhiID(2);
+      wd2.setStationName("Göteborg-2");
       wd2.setDate("2017-02-08");
       wd2.setTime("10.30");
       wd2.setTemperature(20);
@@ -71,18 +63,12 @@ private String message = "ERROR!";
       wd2.setCloudCoverage((byte)12);
       wd2.setCloudTypes("Cirrus");
       wd2.setAirPressure(1014);
-      wd2.setPrecipitation(12);
-      
-      List<WeatherData> dataList2 = new ArrayList<WeatherData>();
-      dataList2.add(wd2);
-      station2.setDataList(dataList2);
+      wd2.setPrecipitation(12);;
       
       
     //storing all entities
       entitymanager.persist(wd);
-      entitymanager.persist(station);
       entitymanager.persist(wd2);
-      entitymanager.persist(station2);
       
       
       entitymanager.getTransaction().commit();
