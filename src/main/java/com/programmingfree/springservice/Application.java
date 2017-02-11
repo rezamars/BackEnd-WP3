@@ -23,9 +23,9 @@ public class Application {
 		
 		
 		SpringApplication.run(Application.class, args);	
-		DBService service = new DBService();
-		String message = service.createAndInitDB();
-		System.out.println(message);
+		DBService2 service = new DBService2();
+		//String message = service.createAndInitDB();
+		//System.out.println(message);
 		//This is just a test comment
 	}
 

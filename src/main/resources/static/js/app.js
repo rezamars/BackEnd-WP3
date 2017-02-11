@@ -1,115 +1,161 @@
-var taskManagerModule = angular.module('taskManagerApp', ['ngAnimate']);
+//alert('In the beginning!');
+/*
+//var app = angular.module('myApp', []);
+angular.module('myApp', ['ngRoute'])
+.controller('myCtrl', function($scope, $http) {
+	$scope.arrStations = new Array();
+	//alert('hej');
+    $http.get("http://localhost:9090/stations/2")
+    .then(function(response) {
+    	$scope.x = 'hej';
+    	alert(response.stationName);
+    	$scope.arrStations.push(response.stationName);
+    });
+});
+*/
 
-taskManagerModule.controller('taskManagerController', function ($scope,$http) {
-	
-	var urlBase="";
-	$scope.toggle=true;
-	$scope.selection = [];
-	$scope.statuses=['ACTIVE','COMPLETED'];
-	$scope.priorities=['HIGH','LOW','MEDIUM'];
-	$http.defaults.headers.post["Content-Type"] = "application/json";
+/*
+alert('hej');
+angular
+.module('myApp', ['ngRoute'])
+.controller('myCtrl', 
+  function($scope) {
 
-    function findAllTasks() {
-        //get all tasks and display initially
-        $http.get(urlBase + '/tasks/search/findByTaskArchived?archivedfalse=0').
-            success(function (data) {
-                if (data._embedded != undefined) {
-                    $scope.tasks = data._embedded.tasks;
-                } else {
-                    $scope.tasks = [];
-                }
-                for (var i = 0; i < $scope.tasks.length; i++) {
-                    if ($scope.tasks[i].taskStatus == 'COMPLETED') {
-                        $scope.selection.push($scope.tasks[i].taskId);
-                    }
-                }
-                $scope.taskName="";
-                $scope.taskDesc="";
-                $scope.taskPriority="";
-                $scope.taskStatus="";
-                $scope.toggle='!toggle';
-            });
-    }
+    $scope.x = 'hello';
+  }
+]);
 
-    findAllTasks();
+/*
+angular.module('myApp', [])
+.config(['$sceDelegateProvider', function($sceDelegateProvider) {
+  // We must whitelist the JSONP endpoint that we are using to show that we trust it
+  $sceDelegateProvider.resourceUrlWhitelist([
+	'http://localhost:9090/stations/2',                                         
+    'self',
+    'https://angularjs.org/**'
+  ]);
+}])
+.controller('myCtrl', ['$scope', '$http', '$templateCache',
+  function($scope, $http, $templateCache) {
+	$scope.arrStations = new Array();
+    $scope.method = 'GET';
+    $scope.url = 'http://localhost:9090/stations/2';
 
-	//add a new task
-	$scope.addTask = function addTask() {
-		if($scope.taskName=="" || $scope.taskDesc=="" || $scope.taskPriority == "" || $scope.taskStatus == ""){
-			alert("Insufficient Data! Please provide values for task name, description, priortiy and status");
-		}
-		else{
-		 $http.post(urlBase + '/tasks', {
-             taskName: $scope.taskName,
-             taskDescription: $scope.taskDesc,
-             taskPriority: $scope.taskPriority,
-             taskStatus: $scope.taskStatus
-         }).
-		  success(function(data, status, headers) {
-			 
-             var newTaskUri = headers()["location"];
-             console.log("Might be good to GET " + newTaskUri + " and append the task.");
-             // Refetching EVERYTHING every time can get expensive over time
-             // Better solution would be to $http.get(headers()["location"]) and add it to the list
-             findAllTasks();
-		    });
-		}
-	};
-		
-	// toggle selection for a given task by task id
-	  $scope.toggleSelection = function toggleSelection(taskUri) {
-	    var idx = $scope.selection.indexOf(taskUri);
+    $scope.fetch = function() {
+      $scope.code = null;
+      $scope.response = null;
 
-	    // is currently selected
-        // HTTP PATCH to ACTIVE state
-	    if (idx > -1) {
-	      $http.patch(taskUri, { taskStatus: 'ACTIVE' }).
-		  success(function(data) {
-		      
-              findAllTasks();
-		    });
-	      $scope.selection.splice(idx, 1);
-	    }
+      $http({method: $scope.method, url: $scope.url, cache: $templateCache}).
+        then(function(response) {
+        	alert(response.stationName);
+        	$scope.arrStations.push(response.stationName);
+          //$scope.status = response.status;
+          //$scope.data = response.data;
+        }, function(response) {
+        	alert('Failed');
+          $scope.data = response.data || 'Request failed';
+          $scope.status = response.status;
+      });
+    };
 
-	    // is newly selected
-        // HTTP PATCH to COMPLETED state
-	    else {
-	      $http.patch(taskUri, { taskStatus: 'COMPLETED' }).
-		  success(function(data) {
-			  
-              findAllTasks();
-		    });
-	      $scope.selection.push(taskUri);
-	    }
-	  };
-	  
-	
-	// Archive Completed Tasks
-	  $scope.archiveTasks = function archiveTasks() {
-          $scope.selection.forEach(function(taskUri) {
-              if (taskUri != undefined) {
-                  $http.patch(taskUri, { taskArchived: 1});
-              }
-          });
-          
-          console.log("It's risky to run this without confirming all the patches are done. when.js is great for that");
-          findAllTasks();
-	  };
-	
+    $scope.updateModel = function(method, url) {
+      $scope.method = method;
+      $scope.url = url;
+    };
+  }]);
+*/
+
+var app = angular.module('myApp', ['ngRoute']);
+app.controller('myCtrl', function($scope,$http) {
+	$scope.arrStations = new Array();
+    $http.get("http://localhost:9090/stations").success(function (data) {
+    	
+    	//$scope.arrStations.push(data._embedded.stations.stationName);
+    	//alert(data._embedded.stations[1].stationName);
+    	for(var i = 0 ; i<data._embedded.stations.length ; i++){
+    		$scope.arrStations.push(data._embedded.stations[i].stationName);
+    	}
+    	//alert(data.stationName);
+    	//$scope.list = 'hoppsan';
+        //$.map(data, function (item) {
+        	//alert(item.stationName);
+            //arrBooks.push(data.stationName);
+        	//arrBooks.push('hejsan!');
+        //});
+
+        $scope.x = $scope.arrStations;
+    }).error(function (status) {
+    	//arrBooks.push('hejsan!');
+        alert(status);
+    });
 });
 
-//Angularjs Directive for confirm dialog box
-taskManagerModule.directive('ngConfirmClick', [
-	function(){
-         return {
-             link: function (scope, element, attr) {
-                 var msg = attr.ngConfirmClick || "Are you sure?";
-                 var clickAction = attr.confirmedClick;
-                 element.bind('click',function (event) {
-                     if ( window.confirm(msg) ) {
-                         scope.$eval(clickAction);
-                     }
-                 });
-             }
-         };
- }]);
+
+/*angular.module('weatherApp', []).controller('weatherCtrl', function ($scope, $http) {
+            $scope.ProductList = null;
+            //Declaring the function to load data from database
+            $scope.fillProductList = function () {
+                $http({
+                    method: 'GET',
+                    url: 'station',
+                    data: {}
+                }).success(function (result) {
+                    $scope.ProductList = result.d;
+                });
+            };
+            //Calling the function to load the data on pageload
+            $scope.fillProductList();
+});
+*/
+
+
+
+/*
+var myApp = angular.module('myApp', []);
+    myApp.controller('myController', function ($scope, $http) {
+        
+        var arrBooks = new Array();
+        $http.get("http://localhost:9090/stations.json").success(function (data) {
+
+            $.map(data, function (item) {
+                //arrBooks.push(item.id);
+            	arrBooks.push('hejsan!');
+            });
+
+            $scope.list = arrBooks;
+        }).error(function (status) {
+        	arrBooks.push('hejsan!');
+            alert(status);
+        });
+    });
+*/
+/*
+var app = angular.module('myApp', []);
+app.controller('myController', function($scope, $http) {
+	//$scope.taskName = 'hallu';
+    $http.get('/station/')
+    .then(function (response) {$scope.taskName = response.data.records;});
+});
+*/
+/*
+var app = angular.module('weatherApp', []);
+app.service('weatherApp', function($http) {
+	  this.getData = function() {
+	     return $http({
+	         method: 'GET',
+	         url: 'station',
+	     }).success(function(data){
+	       return data;
+	     }).error(function(){
+	        alert("error");
+	        return null ;
+	     });
+	  }
+	});
+app.controller('weatherCtrl', function($scope, dataService) {
+	   $scope.data = null;
+	   dataService.getData().then(function(response) {
+	       $scope.data = response;
+	   });
+	})
+*/

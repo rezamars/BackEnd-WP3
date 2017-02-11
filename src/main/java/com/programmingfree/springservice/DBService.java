@@ -50,17 +50,18 @@ private String message = "ERROR!";
 	  
       
       //Task task = new Task(0,0,"description",date,"taskname","MEDIUM",cal.getTime() ,"ACTIVE");
-      Task task = new Task();
+      /*
+	  Task task = new Task();
       task.setTaskId(0);
       task.setTaskArchived(0);
       task.setTaskDescription("description");
       task.setTaskName("Taskname");
       task.setTaskPriority("MEDIUM");
       task.setTaskStatus("ACTIVE");
-      
+      */
       
     //storing all entities
-      entitymanager.persist(task);
+      //entitymanager.persist(task);
       
       entitymanager.getTransaction().commit();
       entitymanager.close();
