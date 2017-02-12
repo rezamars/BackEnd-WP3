@@ -8,11 +8,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular-route.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     
-
-
     <script type="text/javascript" src="./js/app.js"></script>
     
-
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/sandstone/bootstrap.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    
 
 
     <!-- Skapa tabell och sökfunktion med filtrering/sortering med checkbox-->
@@ -59,11 +59,12 @@
         <div class="form-group">
             <div class="input-group">
                 <div class="input-group-add-on"><i class="fa fa-search"></i></div>
-                <input type="text" id="search1" placeholder="Search StationId" ng-model="searchStationId">
-
-                <input type="radio" id="radio-station-id"name="StationId" value="stationId"> Station Id
-                <input type="radio" id="radio-station-name"name="StationName" value="stationName"> Station Name <br>
-
+                <input type="text" id="search1" placeholder="Search..." ng-model="searchStation[selectedSearch]" >
+				
+                <input type="radio" id="radio-station-id"name="radiogroup" value="smhiID" ng-model="selectedSearch"> Station Id
+                <input type="radio" id="radio-station-name"name="radiogroup" value="stationName" ng-model="selectedSearch"> Station Name <br>
+				
+				
             </div>
         </div>
     </form>
@@ -167,7 +168,7 @@
         </thead>
 
         <tbody>
-        <tr ng-repeat="station in stationDataList | orderBy:sortType:sortReverse | filter:searchStationName">
+        <tr ng-repeat="station in stationDataList | orderBy:sortType:sortReverse | filter:searchStation">
             <td>{{ station.smhiID }}</td>
             <td>{{ station.stationName }}</td>
             <td>{{ station.date }}</td>

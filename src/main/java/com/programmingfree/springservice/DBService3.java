@@ -53,23 +53,56 @@ private String message = "ERROR!";
       wd2.setId(0);
       wd2.setSmhiID(2);
       wd2.setStationName("Göteborg-2");
-      wd2.setDate("2017-02-08");
-      wd2.setTime("10.30");
-      wd2.setTemperature(20);
-      wd2.setHumidity((byte)20);
-      wd2.setWind(15);
-      wd2.setWindDirection("south-west");
-      wd2.setCloudAltitude(140);
-      wd2.setCloudCoverage((byte)12);
-      wd2.setCloudTypes("Cirrus");
+      wd2.setDate("2017-02-09");
+      wd2.setTime("12.30");
+      wd2.setTemperature(-3);
+      wd2.setHumidity((byte)23);
+      wd2.setWind(10);
+      wd2.setWindDirection("nourth-east");
+      wd2.setCloudAltitude(122);
+      wd2.setCloudCoverage((byte)9);
+      wd2.setCloudTypes("Altocumulus");
       wd2.setAirPressure(1014);
-      wd2.setPrecipitation(12);;
+      wd2.setPrecipitation(55);
+      
+      WeatherData wd3 = new WeatherData();
+      wd3.setId(0);
+      wd3.setSmhiID(3);
+      wd3.setStationName("Stockholm-1");
+      wd3.setDate("2017-02-05");
+      wd3.setTime("19.30");
+      wd3.setTemperature(-10);
+      wd3.setHumidity((byte)40);
+      wd3.setWind(9);
+      wd3.setWindDirection("west");
+      wd3.setCloudAltitude(213);
+      wd3.setCloudCoverage((byte)13);
+      wd3.setCloudTypes("Nimbostratus");
+      wd3.setAirPressure(1014);
+      wd3.setPrecipitation(27);
+      
+      WeatherData wd4 = new WeatherData();
+      wd4.setId(0);
+      wd4.setSmhiID(4);
+      wd4.setStationName("Piteå");
+      wd4.setDate("2017-02-03");
+      wd4.setTime("08.30");
+      wd4.setTemperature(-20);
+      wd4.setHumidity((byte)50);
+      wd4.setWind(5);
+      wd4.setWindDirection("west");
+      wd4.setCloudAltitude(59);
+      wd4.setCloudCoverage((byte)45);
+      wd4.setCloudTypes("Cumulus");
+      wd4.setAirPressure(1014);
+      wd4.setPrecipitation(43);;
       
       
     //storing all entities
       entitymanager.persist(wd);
       entitymanager.persist(wd2);
-      
+      entitymanager.persist(wd3);
+      entitymanager.persist(wd4);
       
       entitymanager.getTransaction().commit();
       entitymanager.close();

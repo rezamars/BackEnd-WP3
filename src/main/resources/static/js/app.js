@@ -33,7 +33,7 @@ var myWeatherApp = angular.module('myWeatherApp', []);
 
 });*/
 // create my controllers and inject Angular's $scope
-
+/*
 myWeatherApp.controller('mainController', function ($scope, $log) {
     // create a message to display in our view
     $scope.message = 'main page!';
@@ -52,12 +52,18 @@ myWeatherApp.controller('mainController', function ($scope, $log) {
     ];*/
     
     
-});
+//});
 
     
 //var app = angular.module('myWeatherApp', []);
 myWeatherApp.controller('mainController', function($scope,$http) {
+	
+	//$scope.sortType     = 'stationName'; // set the default sort type
+    //$scope.sortReverse  = false;  // set the default sort order
+    //$scope.searchStationName   = '';     // set the default search/filter term
+    
 	$scope.stationDataList = new Array();
+	
     $http.get("http://localhost:9090/weatherDatas").success(function (data) {
     	
     	//alert(data._embedded.weatherDatas[1].stationName);
