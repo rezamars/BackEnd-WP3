@@ -52,21 +52,34 @@
     <div class="alert alert-info">
         <p>Sort Type: {{ sortType }}</p>
         <p>Sort Reverse: {{ sortReverse }}</p>
-        <p>Search Query: {{ searchStationId }}</p>
+        <p>Search Query: {{ searchStation }}</p>
     </div>
 
-    <form>
-        <div class="form-group">
-            <div class="input-group">
-                <div class="input-group-add-on"><i class="fa fa-search"></i></div>
-                <input type="text" id="search1" placeholder="Search..." ng-model="searchStation[selectedSearch]" >
-				
-                <input type="radio" id="radio-station-id"name="radiogroup" value="smhiID" ng-model="selectedSearch"> Station Id
-                <input type="radio" id="radio-station-name"name="radiogroup" value="stationName" ng-model="selectedSearch"> Station Name <br>
-				
-				
-            </div>
-        </div>
+    <form id="myForm">
+                
+                
+                <input type="text"  id="search1" placeholder="Search..." ng-model="searchStation[selectedSearch]" >
+				<br>
+                <input type="radio" id="radio-station-id" name="radiogroup" value="smhiID" ng-model="selectedSearch"> Station Id
+                <input type="radio" id="radio-station-name" name="radiogroup" value="stationName" ng-model="selectedSearch" > Station Name
+				<input type="radio" id="radio-station-date" name="radiogroup" value="date" ng-model="selectedSearch"> Date
+				<input type="radio" id="radio-station-time" name="radiogroup" value="time" ng-model="selectedSearch"> Time
+				<input type="radio" id="radio-station-temperature" name="radiogroup" value="temperature" ng-model="selectedSearch"> Temperature
+				<input type="radio" id="radio-station-humidity" name="radiogroup" value="humidity" ng-model="selectedSearch"> Humidity
+				<input type="radio" id="radio-station-wind" name="radiogroup" value="wind" ng-model="selectedSearch"> Wind
+				<input type="radio" id="radio-station-windDirection" name="radiogroup" value="windDirection" ng-model="selectedSearch"> WindDirection
+				<input type="radio" id="radio-station-cloudAltitude" name="radiogroup" value="cloudAltitude" ng-model="selectedSearch"> CloudAltitude
+				<input type="radio" id="radio-station-cloudCoverage" name="radiogroup" value="cloudCoverage" ng-model="selectedSearch"> CloudCoverage
+				<input type="radio" id="radio-station-cloudTypes" name="radiogroup" value="cloudTypes" ng-model="selectedSearch"> CloudTypes
+				<input type="radio" id="radio-station-airPressure" name="radiogroup" value="airPressure" ng-model="selectedSearch"> AirPressure
+				<input type="radio" id="radio-station-precipitation" name="radiogroup" value="precipitation" ng-model="selectedSearch"> Precipitation
+				<br>
+				<br>
+				<form>
+					<INPUT TYPE="button" onClick="history.go(0)" VALUE="Refresh">
+				</form>
+				<br>
+           
     </form>
     <table class="table table-bordered table-striped">
 

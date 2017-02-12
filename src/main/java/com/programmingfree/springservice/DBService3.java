@@ -95,7 +95,55 @@ private String message = "ERROR!";
       wd4.setCloudCoverage((byte)45);
       wd4.setCloudTypes("Cumulus");
       wd4.setAirPressure(1014);
-      wd4.setPrecipitation(43);;
+      wd4.setPrecipitation(43);
+      
+      WeatherData wd5 = new WeatherData();
+      wd5.setId(0);
+      wd5.setSmhiID(3);
+      wd5.setStationName("Stockholm-1");
+      wd5.setDate("2017-02-10");
+      wd5.setTime("18.15");
+      wd5.setTemperature(-3);
+      wd5.setHumidity((byte)23);
+      wd5.setWind(4);
+      wd5.setWindDirection("north-east");
+      wd5.setCloudAltitude(160);
+      wd5.setCloudCoverage((byte)22);
+      wd5.setCloudTypes("Altostratus");
+      wd5.setAirPressure(1014);
+      wd5.setPrecipitation(5);
+      
+      WeatherData wd6 = new WeatherData();
+      wd6.setId(0);
+      wd6.setSmhiID(5);
+      wd6.setStationName("Norrköping-1");
+      wd6.setDate("2017-02-11");
+      wd6.setTime("11.18");
+      wd6.setTemperature(-6);
+      wd6.setHumidity((byte)60);
+      wd6.setWind(2);
+      wd6.setWindDirection("east");
+      wd6.setCloudAltitude(333);
+      wd6.setCloudCoverage((byte)29);
+      wd6.setCloudTypes("Nimbostratus");
+      wd6.setAirPressure(1014);
+      wd6.setPrecipitation(10);
+      
+      WeatherData wd7 = new WeatherData();
+      wd7.setId(0);
+      wd7.setSmhiID(1);
+      wd7.setStationName("Göteborg-1");
+      wd7.setDate("2017-02-11");
+      wd7.setTime("18.20");
+      wd7.setTemperature(-3);
+      wd7.setHumidity((byte)5);
+      wd7.setWind(4);
+      wd7.setWindDirection("north-east");
+      wd7.setCloudAltitude(234);
+      wd7.setCloudCoverage((byte)29);
+      wd7.setCloudTypes("Cumulus");
+      wd7.setAirPressure(1014);
+      wd7.setPrecipitation(8);
       
       
     //storing all entities
@@ -103,6 +151,9 @@ private String message = "ERROR!";
       entitymanager.persist(wd2);
       entitymanager.persist(wd3);
       entitymanager.persist(wd4);
+      entitymanager.persist(wd5);
+      entitymanager.persist(wd6);
+      entitymanager.persist(wd7);
       
       entitymanager.getTransaction().commit();
       entitymanager.close();
