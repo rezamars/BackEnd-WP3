@@ -15,7 +15,7 @@ public class WDataServiceImpl implements WDataService{
 	
 	@Override
 	public List<WeatherData> findAllDatas() {
-		return weatherDataRepository.findAll();
+		return (List<WeatherData>) weatherDataRepository.findAll();
 	}
 
 }

@@ -1,0 +1,17 @@
+
+div.container {
+    width: 100%;
+}
+nav {
+    float: left;
+    max-width: 200px;
+    margin: 0;
+    padding: 1em;
+}
+
+article {
+    margin-left: 210px;
+    border-left: 1px solid gray;
+    padding: 1em;
+    overflow: hidden;
+}

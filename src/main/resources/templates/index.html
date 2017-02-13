@@ -26,6 +26,7 @@
     <h1>SMHI tabell</h1>
     <button class="btn btn-default" type="logout">Logout</button>
     <button class="btn btn-default" type="clear">CLEAR</button>
+    <a href="Admin.html">Admin</a>
 </header>
 
 <div ng-app="myWeatherApp">
@@ -56,7 +57,9 @@
     </div>
 
     <form id="myForm">
-                
+      	<div class="form-group">
+            <div class="input-group">
+                <div class="input-group-add-on"><i class="fa fa-search"></i></div>
                 
                 <input type="text"  id="search1" placeholder="Search..." ng-model="searchStation[selectedSearch]" >
 				<br>
@@ -79,7 +82,8 @@
 					<INPUT TYPE="button" onClick="history.go(0)" VALUE="Refresh">
 				</form>
 				<br>
-           
+           </div>
+        </div>
     </form>
     <table class="table table-bordered table-striped">
 
@@ -87,10 +91,10 @@
         <thead>
         <tr>
             <td>
-                <a href="#" ng-click="sortType = 'stationId'; sortReverse = !sortReverse">
+                <a href="#" ng-click="sortType = 'smhiID'; sortReverse = !sortReverse">
                     Station Id
-                    <span ng-show="sortType == 'stationId' && !sortReverse" class="fa fa-caret-down"></span>
-                    <span ng-show="sortType == 'stationId' && sortReverse" class="fa fa-caret-up"></span>
+                    <span ng-show="sortType == 'smhiID' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'smhiID' && sortReverse" class="fa fa-caret-up"></span>
                 </a>
             </td>
             <td>
@@ -136,38 +140,38 @@
                 </a>
             </td>
             <td>
-                <a href="#" ng-click="sortType = 'wind-direction'; sortReverse = !sortReverse">
+                <a href="#" ng-click="sortType = 'windDirection'; sortReverse = !sortReverse">
                     Wind Direction
-                    <span ng-show="sortType == 'wind-direction' && !sortReverse" class="fa fa-caret-down"></span>
-                    <span ng-show="sortType == 'wind-direction' && sortReverse" class="fa fa-caret-up"></span>
+                    <span ng-show="sortType == 'windDirection' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'windDirection' && sortReverse" class="fa fa-caret-up"></span>
                 </a>
             </td>
             <td>
-                <a href="#" ng-click="sortType = 'cloud-altitude'; sortReverse = !sortReverse">
+                <a href="#" ng-click="sortType = 'cloudAltitude'; sortReverse = !sortReverse">
                     Cloud Altitude
-                    <span ng-show="sortType == 'cloud-altitude' && !sortReverse" class="fa fa-caret-down"></span>
-                    <span ng-show="sortType == 'cloud-altitude' && sortReverse" class="fa fa-caret-up"></span>
+                    <span ng-show="sortType == 'cloudAltitude' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'cloudAltitude' && sortReverse" class="fa fa-caret-up"></span>
                 </a>
             </td>
             <td>
-                <a href="#" ng-click="sortType = 'cloud-coverage'; sortReverse = !sortReverse">
+                <a href="#" ng-click="sortType = 'cloudCoverage'; sortReverse = !sortReverse">
                     Cloud Coverage
-                    <span ng-show="sortType == 'cloud-coverage' && !sortReverse" class="fa fa-caret-down"></span>
-                    <span ng-show="sortType == 'cloud-coverage' && sortReverse" class="fa fa-caret-up"></span>
+                    <span ng-show="sortType == 'cloudCoverage' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'cloudCoverage' && sortReverse" class="fa fa-caret-up"></span>
                 </a>
             </td>
             <td>
-                <a href="#" ng-click="sortType = 'cloud-types'; sortReverse = !sortReverse">
+                <a href="#" ng-click="sortType = 'cloudTypes'; sortReverse = !sortReverse">
                     Cloud Types
-                    <span ng-show="sortType == 'cloud-types' && !sortReverse" class="fa fa-caret-down"></span>
-                    <span ng-show="sortType == 'cloud-types' && sortReverse" class="fa fa-caret-up"></span>
+                    <span ng-show="sortType == 'cloudTypes' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'cloudTypes' && sortReverse" class="fa fa-caret-up"></span>
                 </a>
             </td>
             <td>
-                <a href="#" ng-click="sortType = 'air-pressure'; sortReverse = !sortReverse">
+                <a href="#" ng-click="sortType = 'airPressure'; sortReverse = !sortReverse">
                     Air Pressure
-                    <span ng-show="sortType == 'air-pressure' && !sortReverse" class="fa fa-caret-down"></span>
-                    <span ng-show="sortType == 'air-pressure' && sortReverse" class="fa fa-caret-up"></span>
+                    <span ng-show="sortType == 'airPressure' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'airPressure' && sortReverse" class="fa fa-caret-up"></span>
                 </a>
             </td>
             <td>

@@ -65,7 +65,7 @@ myWeatherApp.controller('mainController', function($scope,$http) {
     
 	$scope.stationDataList = new Array();
 	
-    $http.get("http://localhost:9090/weatherDatas").success(function (data) {
+    $http.get("/weatherDatas").success(function (data) {
     	
     	//alert(data._embedded.weatherDatas[1].stationName);
     	for(var i = 0 ; i<data._embedded.weatherDatas.length ; i++){
