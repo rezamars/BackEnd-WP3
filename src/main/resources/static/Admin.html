@@ -36,19 +36,43 @@
         		</tr>
      		</thead>
      	<tbody>
-        	<tr ng-repeat="station in stationDataList | orderBy:sortType:sortReverse">
-            	<td>{{ station.smhiID }}</td>
-            	<td>{{ station.stationName }}</td>
+     		<div class="menu">
+        	<tr ng-repeat="station in stationDataList" >
+            	<td> {{ station.smhiID }}</td>
+            	<td ><a href=""  ng-click="open(station.stationName)" onclick="">{{ station.stationName }}</a></td>
         	</tr>
+        	</div>
         </tbody>
 
     </table>
     </nav>
+    
     <article>
-  <h1>London</h1>
-  <p>London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
-  <p>Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.</p>
-</article>
+		<table class="table table-bordered table-striped">
+        	<thead>
+        		<tr>
+    				<td>
+            			Station Name
+    				</td>
+    				<td>
+            			Date
+    				</td>
+    				<td>
+            			Time
+    				</td>
+        		</tr>
+     		</thead>
+     	<tbody>
+        	<tr ng-repeat="station in specificStationData">
+            	
+            	<td >{{ station.stationName }}</td>
+            	<td>{{ station.date }}</td>
+            	<td>{{ station.time }}</td>
+        	</tr>
+        </tbody>
+
+    	</table>
+  	</article>
     </div>
     
 </div>	
