@@ -67,12 +67,112 @@
             	
             	<td >{{ station.stationName }}</td>
             	<td>{{ station.date }}</td>
-            	<td>{{ station.time }}</td>
+            	<td><a href=""  ng-click="getPost(station.stationName,station.time)" onclick="">{{ station.time }}</td>
         	</tr>
         </tbody>
 
     	</table>
   	</article>
+  	
+  	<div ng-show="shouldShow">
+  	<article>
+  		<table class="table table-bordered table-striped" ng-repeat="station in specificPost">
+        	<thead>
+        		<tr>
+    				<td colspan="4">
+            			{{station.stationName}}
+    				</td>
+        		</tr>
+     		</thead>
+     	<tbody>
+     		<tr >
+     			<td>
+     				Date:
+     			</td>
+     			<td>
+     				<input type="text" name="date" value="{{station.date}}">
+     			</td>
+     			<td>
+     				Time:
+     			</td>
+     			<td>
+     				<input type="text" name="time" value="{{station.time}}">
+     			</td>
+     		</tr>
+     		<tr >
+     			<td>
+     				Temperature:
+     			</td>
+     			<td>
+     				<input type="text" name="temperature" value="{{station.temperature}}">
+     			</td>
+     			<td>
+     				Humidity:
+     			</td>
+     			<td>
+     				<input type="text" name="humidity" value="{{station.humidity}}">
+     			</td>
+     		</tr>
+     		<tr >
+     			<td>
+     				Wind:
+     			</td>
+     			<td>
+     				<input type="text" name="wind" value="{{station.wind}}">
+     			</td>
+     			<td>
+     				Wind Direction:
+     			</td>
+     			<td>
+     				<input type="text" name="windDirection" value="{{station.windDirection}}">
+     			</td>
+     		</tr>
+     		<tr >
+     			<td>
+     				Cloud Altitude:
+     			</td>
+     			<td>
+     				<input type="text" name="cloudAltitude" value="{{station.cloudAltitude}}">
+     			</td>
+     			<td>
+     				Cloud Coverage:
+     			</td>
+     			<td>
+     				<input type="text" name="cloudCoverage" value="{{station.cloudCoverage}}">
+     			</td>
+     		</tr>
+     		<tr >
+     			<td>
+     				Cloud Types:
+     			</td>
+     			<td>
+     				<input type="text" name="cloudTypes" value="{{station.cloudTypes}}">
+     			</td>
+     			<td>
+     				Air Pressure:
+     			</td>
+     			<td>
+     				<input type="text" name="airPressure" value="{{station.airPressure}}">
+     			</td>
+     		</tr>
+     		<tr >
+     			<td>
+     				Precipitation:
+     			</td>
+     			<td>
+     				<input type="text" name="precipitation" value="{{station.precipitation}}">
+     			</td>
+     			<td colspan="2">
+     				<input type="button" name="" value="UPDATE" ng-click="updateData()">
+     			</td>
+     			
+     		</tr>
+        	
+        </tbody>
+
+    	</table>
+  	</article>
+  	</div>
     </div>
     
 </div>	

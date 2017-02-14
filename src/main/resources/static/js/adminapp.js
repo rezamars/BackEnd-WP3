@@ -2,6 +2,7 @@
 var kashk ;
 var orgDataList = new Array();
 var indexOf = -1;
+var timePar2;
 
 var myWeatherApp = angular.module('myWeatherApp', []);
 
@@ -9,8 +10,15 @@ var myWeatherApp = angular.module('myWeatherApp', []);
 myWeatherApp.controller('mainController', function($scope,$http) {
     
 	$scope.open = function (par) {
-		  indexOf = par;
-		  select($scope,$http);
+		$scope.shouldShow =  (false);
+		indexOf = par;
+		select1($scope,$http);
+	}
+	$scope.getPost = function (par,timePar) {
+		$scope.shouldShow =  (true);
+		indexOf = par;
+		timePar2 = timePar;
+		select2($scope,$http);
 	}
 	
 	$scope.stationDataList = new Array();
@@ -37,6 +45,18 @@ myWeatherApp.controller('mainController', function($scope,$http) {
     }).error(function (status) {
         alert(status);
     });
+    
+    $scope.updateData = function updateData() {
+    
+    	$http.post("/weatherDatas/1").success(function (data) {
+    	
+        	alert("Data updated!");
+            
+        }).error(function (status) {
+            alert(status);    
+     });
+    }
+    
 });
 
 function removeDub(array){
@@ -66,24 +86,39 @@ function removeDub(array){
 }
 
 
-function select($scope,$http) {
-	//angular.element(document.getElementById('mainController')).scope();
-	//alert(indexOf);
+function select1($scope,$http) {
+	
 	$scope.specificStationData = new Array();
 	$http.get("/weatherDatas").success(function (data) {
 		
 		for(var i = 0 ; i<data._embedded.weatherDatas.length ; i++){
 			if(data._embedded.weatherDatas[i].stationName == indexOf){
 				$scope.specificStationData.push(data._embedded.weatherDatas[i]);
-				//alert('hej');
 			}
     	}
 	
 	}).error(function (status) {
 		alert(status);
 	});
-	//alert(specificStationData[0].station.stationName);
-	//alert(document.getElementById('station2-0'));
+}
+
+function select2($scope,$http) {
+	
+	$scope.specificPost = new Array();
+	$http.get("/weatherDatas").success(function (data) {
+		
+		for(var i = 0 ; i<data._embedded.weatherDatas.length ; i++){
+			if(data._embedded.weatherDatas[i].stationName == indexOf){
+				if(data._embedded.weatherDatas[i].time == timePar2){
+					$scope.specificPost.push(data._embedded.weatherDatas[i]);
+				}
+				
+			}
+    	}
+	
+	}).error(function (status) {
+		alert(status);
+	});
 }
 
 
