@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Adminpage</title>
+    <title>Admin Edit page</title>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular-route.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     
-    <script type="text/javascript" src="js/adminapp.js"></script>
+    <script type="text/javascript" src="js/admineditapp.js"></script>
     
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/sandstone/bootstrap.min.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
@@ -16,7 +16,7 @@
 </head>
 <body>
 <header>
-    <h1>SMHI Admin</h1>
+    <h1>SMHI Admin Edit</h1>
     <button class="btn btn-default" type="logout">Logout</button>
     <<a href="home">Back</a>
 </header>
@@ -90,13 +90,13 @@
      				Date:
      			</td>
      			<td>
-     				<input type="text" name="date" value="{{station.date}}">
+     				<input type="text" id="date" name="date" value="{{station.date}}">
      			</td>
      			<td>
      				Time:
      			</td>
      			<td>
-     				<input type="text" name="time" value="{{station.time}}">
+     				<input type="text" id="time" name="time" value="{{station.time}}">
      			</td>
      		</tr>
      		<tr >
@@ -104,13 +104,13 @@
      				Temperature:
      			</td>
      			<td>
-     				<input type="text" name="temperature" value="{{station.temperature}}">
+     				<input type="text" id="temperature" name="temperature" value="{{station.temperature}}">
      			</td>
      			<td>
      				Humidity:
      			</td>
      			<td>
-     				<input type="text" name="humidity" value="{{station.humidity}}">
+     				<input type="text" id="humidity" name="humidity" value="{{station.humidity}}">
      			</td>
      		</tr>
      		<tr >
@@ -118,13 +118,13 @@
      				Wind:
      			</td>
      			<td>
-     				<input type="text" name="wind" value="{{station.wind}}">
+     				<input type="text" id="wind" name="wind" value="{{station.wind}}">
      			</td>
      			<td>
      				Wind Direction:
      			</td>
      			<td>
-     				<input type="text" name="windDirection" value="{{station.windDirection}}">
+     				<input type="text" id="windDirection" name="windDirection" value="{{station.windDirection}}">
      			</td>
      		</tr>
      		<tr >
@@ -132,13 +132,13 @@
      				Cloud Altitude:
      			</td>
      			<td>
-     				<input type="text" name="cloudAltitude" value="{{station.cloudAltitude}}">
+     				<input type="text" id="cloudAltitude" name="cloudAltitude" value="{{station.cloudAltitude}}">
      			</td>
      			<td>
      				Cloud Coverage:
      			</td>
      			<td>
-     				<input type="text" name="cloudCoverage" value="{{station.cloudCoverage}}">
+     				<input type="text" id="cloudCoverage" name="cloudCoverage" value="{{station.cloudCoverage}}">
      			</td>
      		</tr>
      		<tr >
@@ -146,13 +146,13 @@
      				Cloud Types:
      			</td>
      			<td>
-     				<input type="text" name="cloudTypes" value="{{station.cloudTypes}}">
+     				<input type="text" id="cloudTypes" name="cloudTypes" value="{{station.cloudTypes}}">
      			</td>
      			<td>
      				Air Pressure:
      			</td>
      			<td>
-     				<input type="text" name="airPressure" value="{{station.airPressure}}">
+     				<input type="text" id="airPressure" name="airPressure" value="{{station.airPressure}}">
      			</td>
      		</tr>
      		<tr >
@@ -160,7 +160,7 @@
      				Precipitation:
      			</td>
      			<td>
-     				<input type="text" name="precipitation" value="{{station.precipitation}}">
+     				<input type="text" id="precipitation" name="precipitation" value="{{station.precipitation}}">
      			</td>
      			<td colspan="2">
      				<input type="button" name="" value="UPDATE" ng-click="updateData()">

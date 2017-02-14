@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 @RepositoryRestResource
 public interface WeatherDataRepository extends CrudRepository<WeatherData, Integer>{
 
+	WeatherData saveAndFlush(WeatherData wd);
+
 }

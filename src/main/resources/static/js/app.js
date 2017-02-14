@@ -2,6 +2,12 @@
  * Created by Soniiqaah on 2017-02-08.
  */
 
+$( document ).ready(function() {
+	var url = document.URL;
+	localStorage.setItem('baseurl', url);
+});
+
+
 var myWeatherApp = angular.module('myWeatherApp', []);
 
 // konfigurerar mina routes

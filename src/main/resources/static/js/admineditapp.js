@@ -48,9 +48,37 @@ myWeatherApp.controller('mainController', function($scope,$http) {
     
     $scope.updateData = function updateData() {
     
-    	$http.post("/weatherDatas/1").success(function (data) {
+    	var baseurl = localStorage.getItem('baseurl');
+    	//alert(indexOf);
     	
-        	alert("Data updated!");
+    	var newListArray = orgDataList;
+    	var listToSaveInDB = new Array();
+    	//alert(document.getElementById('time').value);
+    	//newListArray[0].date = document.getElementById('date').value;
+    	//newListArray[0].time = document.getElementById('time').value;
+    	for(var i = 0 ; i < newListArray.length ; i++){
+			if(newListArray[i].stationName == indexOf && newListArray[i].time == timePar2){
+				newListArray[i].date = document.getElementById('date').value;
+		    	newListArray[i].time = document.getElementById('time').value;
+		    	newListArray[i].temperature = document.getElementById('temperature').value;
+		    	newListArray[i].humidity = document.getElementById('humidity').value;
+		    	newListArray[i].wind = document.getElementById('wind').value;
+		    	newListArray[i].windDirection = document.getElementById('windDirection').value;
+		    	newListArray[i].cloudAltitude = document.getElementById('cloudAltitude').value;
+		    	newListArray[i].cloudCoverage = document.getElementById('cloudCoverage').value;
+		    	newListArray[i].cloudTypes = document.getElementById('cloudTypes').value;
+		    	newListArray[i].airPressure = document.getElementById('airPressure').value;
+		    	newListArray[i].precipitation = document.getElementById('precipitation').value;
+		    	listToSaveInDB.push(newListArray[i]);
+			}
+			else{
+				listToSaveInDB.push(newListArray[i]);
+			}
+    	}
+    	
+    	var myJsonString = JSON.stringify(orgDataList);
+    	$http.put(('/weatherDatas'),myJsonString).success(function (data) {
+    		alert('Successfully updated!')
             
         }).error(function (status) {
             alert(status);    

@@ -17,9 +17,12 @@ public class RestApiController {
 	@Autowired
 	WDataService dataService;
 	
+	List<WeatherData> datas;
+	WeatherDataRepository repo;
+	
 	@RequestMapping(value = "/weatherdata/", method = RequestMethod.GET)
     public ResponseEntity<List<WeatherData>> listAllData() {
-        List<WeatherData> datas = dataService.findAllDatas();
+		datas = dataService.findAllDatas();
         if (datas.isEmpty()) {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
             // You many decide to return HttpStatus.NOT_FOUND
@@ -27,6 +30,12 @@ public class RestApiController {
         return new ResponseEntity<List<WeatherData>>(datas, HttpStatus.OK);
     }
 	
-	
+	@RequestMapping(value = "/weatherDatas",method = RequestMethod.PUT)
+	public WeatherData form(WeatherData wd) {
+        
+		WeatherData result = repo.saveAndFlush(wd);
+        
+        return result;
+    }
 
 }
