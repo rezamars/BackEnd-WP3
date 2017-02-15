@@ -85,35 +85,4 @@ myWeatherApp.controller('mainController', function($scope,$http) {
     });
 });
 
-/*
-$( document ).ready(function() {
-	//document.getElementById('radio-station-name').checked = true;
-});
-*/
 
-/*
-function resetid($scope){
-	document.getElementById('radio-station-id').val = "";
-	$scope.searchStation   = '';
-}
-function resetname($scope){
-	document.getElementById('radio-station-name').val = "";
-	$scope.searchStation   = '';
-}
-*/
-
-function clearSearchField($scope)
-{  
-	//alert(document.getElementById('radio-station-name').value);
-	//document.getElementById('search1').val = "";
-	//document.form.radiogroup.value = "";
-	//$("#search1").trigger(':reset');
-	//document.getElementById('search1').reset();
-	//document.getElementById('search1').value = '';
-	//$("#search1").val('');
-	//$scope.searchStationName   = '';  
-	//document.getElementById("myForm").reset();
-	//$scope.searchStation.val = '';
-	//document.getElementById('radio-station-name').clear();
-	//document.getElementById('radio-station-name').value = "";
-}

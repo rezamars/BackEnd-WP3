@@ -12,22 +12,11 @@ myWeatherApp.controller('mainController', function($scope,$http) {
     
 	//save name of station in indexName getting the name from click on page
 	//toggle hide
-	//call select1-method
+	//save  stationName in stName for access in html-page
 	$scope.open = function (inName) {
-		$scope.shouldShow =  (false);
-		indexName = inName;
-		select1($scope,$http);
-	}
-	
-	//save name of station in indexName getting the name from click on page
-	//save time for selected station in timePar2
-	//toggle show
-	//call select2-method
-	$scope.getPost = function (inId,inName,timePar) {
 		$scope.shouldShow =  (true);
 		indexName = inName;
-		timePar2 = timePar;
-		select2($scope,$http);
+		$scope.stName = inName;
 	}
 	
 	$scope.stationDataList = new Array();
@@ -52,12 +41,24 @@ myWeatherApp.controller('mainController', function($scope,$http) {
         alert(status);
     });
     
-    $scope.updateData = function updateData() {
+    $scope.createData = function createData() {
     
-    	//an object to hold the new entries the admin types in admin-edit page
-    	var objToSaveInDB = orgDataList[indexId];
+    	var smhiId = -1;
+    	indexId = $scope.stationorg.length;
+    	
+    	//loops to get smhiID and stores it in shidId
+    	for(var z = 0 ; z < $scope.stationorg.length ; z++){
+    		if(indexName == $scope.stationorg[z].stationName){
+    			smhiId = $scope.stationorg[z].smhiID;
+    		}
+    	}
+    	 
+    	//an object to hold the new entries the admin types in admin-create page
+    	var objToSaveInDB = $scope.stationorg[0];
     	
     	//get all the new values and store them
+    	objToSaveInDB.smhiID = smhiId;
+    	objToSaveInDB.stationName = indexName;
     	objToSaveInDB.date = document.getElementById('date').value;
     	objToSaveInDB.time = document.getElementById('time').value;
     	objToSaveInDB.temperature = document.getElementById('temperature').value;
@@ -70,9 +71,9 @@ myWeatherApp.controller('mainController', function($scope,$http) {
     	objToSaveInDB.airPressure = document.getElementById('airPressure').value;
     	objToSaveInDB.precipitation = document.getElementById('precipitation').value;
     	
-    	//put request
-    	$http.put(('/weatherDatas/' + (indexId+1)),objToSaveInDB).success(function (data) {
-    		alert('Successfully updated!')
+    	//post request to store the data in database
+    	$http.post(('/weatherDatas'),objToSaveInDB).success(function (data) {
+    		alert('Successfully created new data!')
             
         }).error(function (status) {
             alert(status);    
@@ -86,19 +87,23 @@ myWeatherApp.controller('mainController', function($scope,$http) {
 function removeDub(array){
 	newstationDataList = array;
 	var toRemoveIndexes = new Array();
+	var iter = -1;
 	
-	for(var x = 0 ; x < 7 ; x++){
+	//nested loop to get the indexes of the dublicate-stationNames in array
+	//stores the indexes in toRemoveIndexes
+	for(var x = 0 ; x < array.length ; x++){
 		var tmp = array[x].stationName;
 		
-		for(var y = (x+1) ; y < 7 ; y++){
+		for(var y = (x+1) ; y < array.length ; y++){
 			if(newstationDataList[y].stationName == tmp){
 				toRemoveIndexes.push(y);
 			}
 		}
 	}
 	
-	for(var z = 0 ; z < toRemoveIndexes.length ; z++){
-		newstationDataList.splice(z,1);
+	//Remove the dublicates from the new list
+	for(var z = toRemoveIndexes.length-1 ; z >= -1; z--){
+		newstationDataList.splice(toRemoveIndexes[z],1);
 	}
 	
 	//sorting the list
@@ -107,44 +112,6 @@ function removeDub(array){
 	});
 	
 	return newstationDataList;
-}
-
-//getting the datas for specific station based on clicked on
-function select1($scope,$http) {
-	
-	$scope.specificStationData = new Array();
-	$http.get("/weatherDatas").success(function (data) {
-		
-		for(var i = 0 ; i<data._embedded.weatherDatas.length ; i++){
-			if(data._embedded.weatherDatas[i].stationName == indexName){
-				$scope.specificStationData.push(data._embedded.weatherDatas[i]);
-			}
-    	}
-	
-	}).error(function (status) {
-		alert(status);
-	});
-}
-
-//getting the data for specific time based on click on time in page
-function select2($scope,$http) {
-	
-	$scope.specificPost = new Array();
-	$http.get("/weatherDatas").success(function (data) {
-		
-		for(var i = 0 ; i<data._embedded.weatherDatas.length ; i++){
-			if(data._embedded.weatherDatas[i].stationName == indexName){
-				if(data._embedded.weatherDatas[i].time == timePar2){
-					$scope.specificPost.push(data._embedded.weatherDatas[i]);
-					indexId = i;
-				}
-				
-			}
-    	}
-	
-	}).error(function (status) {
-		alert(status);
-	});
 }
 
 

@@ -34,7 +34,7 @@ public class WeatherData {
 	private double temperature;
 	
 	@Column(name="humidity")
-	private byte humidity;
+	private int humidity;
 	
 	@Column(name="wind")
 	private double wind;
@@ -46,7 +46,7 @@ public class WeatherData {
 	private int cloudAltitude;
 	
 	@Column(name="cloud_coverage")
-	private byte cloudCoverage;
+	private int cloudCoverage;
 	
 	@Column(name="cloud_types")
 	private String cloudTypes ;
@@ -105,11 +105,11 @@ public class WeatherData {
 		this.temperature = temperature;
 	}
 
-	public byte getHumidity() {
+	public int getHumidity() {
 		return humidity;
 	}
 
-	public void setHumidity(byte humidity) {
+	public void setHumidity(int humidity) {
 		this.humidity = humidity;
 	}
 
@@ -137,11 +137,11 @@ public class WeatherData {
 		this.cloudAltitude = cloudAltitude;
 	}
 
-	public byte getCloudCoverage() {
+	public int getCloudCoverage() {
 		return cloudCoverage;
 	}
 
-	public void setCloudCoverage(byte cloudCoverage) {
+	public void setCloudCoverage(int cloudCoverage) {
 		this.cloudCoverage = cloudCoverage;
 	}
 
