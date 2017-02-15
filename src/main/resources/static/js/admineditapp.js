@@ -1,7 +1,8 @@
 
-var kashk ;
+
 var orgDataList = new Array();
-var indexOf = -1;
+var indexName = -1;
+var indexId = -1;
 var timePar2;
 
 var myWeatherApp = angular.module('myWeatherApp', []);
@@ -9,14 +10,22 @@ var myWeatherApp = angular.module('myWeatherApp', []);
 
 myWeatherApp.controller('mainController', function($scope,$http) {
     
-	$scope.open = function (par) {
+	//save name of station in indexName getting the name from click on page
+	//toggle hide
+	//call select1-method
+	$scope.open = function (inName) {
 		$scope.shouldShow =  (false);
-		indexOf = par;
+		indexName = inName;
 		select1($scope,$http);
 	}
-	$scope.getPost = function (par,timePar) {
+	
+	//save name of station in indexName getting the name from click on page
+	//save time for selected station in timePar2
+	//toggle show
+	//call select2-method
+	$scope.getPost = function (inId,inName,timePar) {
 		$scope.shouldShow =  (true);
-		indexOf = par;
+		indexName = inName;
 		timePar2 = timePar;
 		select2($scope,$http);
 	}
@@ -24,23 +33,20 @@ myWeatherApp.controller('mainController', function($scope,$http) {
 	$scope.stationDataList = new Array();
 	$scope.stationorg = new Array();
 	
+	//get call to get the datas
     $http.get("/weatherDatas").success(function (data) {
     	
-    	//alert(data._embedded.weatherDatas[1].stationName);
+    	//a loop to store all datas in orgDataList received from database
     	for(var i = 0 ; i<data._embedded.weatherDatas.length ; i++){
     		$scope.stationDataList.push(data._embedded.weatherDatas[i]);
     		orgDataList.push(data._embedded.weatherDatas[i]);
     	}
     	
-    	//orgDataList = $scope.stationDataList;
+    	//store list in stationorg to be reached in html-page
     	$scope.stationorg = orgDataList;
-    	//kashk = $scope.stationDataList;
+    	
+    	//call the remove dublicates method and store the result in station
     	$scope.station = removeDub($scope.stationDataList);
-    	//$scope.stationorg = orgDataList;
-    	kashk = $scope.stationDataList;
-    	
-    	
-    	
     	
     }).error(function (status) {
         alert(status);
@@ -48,45 +54,35 @@ myWeatherApp.controller('mainController', function($scope,$http) {
     
     $scope.updateData = function updateData() {
     
-    	var baseurl = localStorage.getItem('baseurl');
-    	//alert(indexOf);
+    	//an object to hold the new entries the admin types in admin-edit page
+    	var objToSaveInDB = orgDataList[indexId];
     	
-    	var newListArray = orgDataList;
-    	var listToSaveInDB = new Array();
-    	//alert(document.getElementById('time').value);
-    	//newListArray[0].date = document.getElementById('date').value;
-    	//newListArray[0].time = document.getElementById('time').value;
-    	for(var i = 0 ; i < newListArray.length ; i++){
-			if(newListArray[i].stationName == indexOf && newListArray[i].time == timePar2){
-				newListArray[i].date = document.getElementById('date').value;
-		    	newListArray[i].time = document.getElementById('time').value;
-		    	newListArray[i].temperature = document.getElementById('temperature').value;
-		    	newListArray[i].humidity = document.getElementById('humidity').value;
-		    	newListArray[i].wind = document.getElementById('wind').value;
-		    	newListArray[i].windDirection = document.getElementById('windDirection').value;
-		    	newListArray[i].cloudAltitude = document.getElementById('cloudAltitude').value;
-		    	newListArray[i].cloudCoverage = document.getElementById('cloudCoverage').value;
-		    	newListArray[i].cloudTypes = document.getElementById('cloudTypes').value;
-		    	newListArray[i].airPressure = document.getElementById('airPressure').value;
-		    	newListArray[i].precipitation = document.getElementById('precipitation').value;
-		    	listToSaveInDB.push(newListArray[i]);
-			}
-			else{
-				listToSaveInDB.push(newListArray[i]);
-			}
-    	}
+    	//get all the new values and store them
+    	objToSaveInDB.date = document.getElementById('date').value;
+    	objToSaveInDB.time = document.getElementById('time').value;
+    	objToSaveInDB.temperature = document.getElementById('temperature').value;
+    	objToSaveInDB.humidity = document.getElementById('humidity').value;
+    	objToSaveInDB.wind = document.getElementById('wind').value;
+    	objToSaveInDB.windDirection = document.getElementById('windDirection').value;
+    	objToSaveInDB.cloudAltitude = document.getElementById('cloudAltitude').value;
+    	objToSaveInDB.cloudCoverage = document.getElementById('cloudCoverage').value;
+    	objToSaveInDB.cloudTypes = document.getElementById('cloudTypes').value;
+    	objToSaveInDB.airPressure = document.getElementById('airPressure').value;
+    	objToSaveInDB.precipitation = document.getElementById('precipitation').value;
     	
-    	var myJsonString = JSON.stringify(orgDataList);
-    	$http.put(('/weatherDatas'),myJsonString).success(function (data) {
+    	//put request
+    	$http.put(('/weatherDatas/' + (indexId+1)),objToSaveInDB).success(function (data) {
     		alert('Successfully updated!')
             
         }).error(function (status) {
             alert(status);    
      });
+    	
     }
     
 });
 
+//a function that removes dublicate names of stations
 function removeDub(array){
 	newstationDataList = array;
 	var toRemoveIndexes = new Array();
@@ -100,12 +96,12 @@ function removeDub(array){
 			}
 		}
 	}
-	//alert(toRemoveIndexes);
 	
 	for(var z = 0 ; z < toRemoveIndexes.length ; z++){
 		newstationDataList.splice(z,1);
 	}
 	
+	//sorting the list
 	newstationDataList.sort(function(a, b) {
 	    return parseFloat(a.smhiID) - parseFloat(b.smhiID);
 	});
@@ -113,14 +109,14 @@ function removeDub(array){
 	return newstationDataList;
 }
 
-
+//getting the datas for specific station based on clicked on
 function select1($scope,$http) {
 	
 	$scope.specificStationData = new Array();
 	$http.get("/weatherDatas").success(function (data) {
 		
 		for(var i = 0 ; i<data._embedded.weatherDatas.length ; i++){
-			if(data._embedded.weatherDatas[i].stationName == indexOf){
+			if(data._embedded.weatherDatas[i].stationName == indexName){
 				$scope.specificStationData.push(data._embedded.weatherDatas[i]);
 			}
     	}
@@ -130,15 +126,17 @@ function select1($scope,$http) {
 	});
 }
 
+//getting the data for specific time based on click on time in page
 function select2($scope,$http) {
 	
 	$scope.specificPost = new Array();
 	$http.get("/weatherDatas").success(function (data) {
 		
 		for(var i = 0 ; i<data._embedded.weatherDatas.length ; i++){
-			if(data._embedded.weatherDatas[i].stationName == indexOf){
+			if(data._embedded.weatherDatas[i].stationName == indexName){
 				if(data._embedded.weatherDatas[i].time == timePar2){
 					$scope.specificPost.push(data._embedded.weatherDatas[i]);
+					indexId = i;
 				}
 				
 			}

@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -30,12 +32,18 @@ public class RestApiController {
         return new ResponseEntity<List<WeatherData>>(datas, HttpStatus.OK);
     }
 	
-	@RequestMapping(value = "/weatherDatas",method = RequestMethod.PUT)
-	public WeatherData form(WeatherData wd) {
+	/*@RequestMapping(value = "/weatherDatas",method = RequestMethod.PUT)
+	public WeatherData update(WeatherData wd) {
         
 		WeatherData result = repo.saveAndFlush(wd);
         
         return result;
     }
-
+	*/
+	/*
+	@RequestMapping(value = "/weatherDatas", method = RequestMethod.PUT)
+	public @ResponseBody String updateWD(@RequestBody WeatherData wd){
+	 return "ok";
+	}
+	*/
 }
