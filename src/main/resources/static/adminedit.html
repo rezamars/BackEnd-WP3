@@ -80,37 +80,26 @@
         	<thead>
         		<tr>
     				<td colspan="4">
-            			{{station.stationName}}
+            			{{station.stationName}}  ( {{station.date}} ,  {{station.time}} )
     				</td>
         		</tr>
      		</thead>
      	<tbody>
-     		<tr >
-     			<td>
-     				Date:
-     			</td>
-     			<td>
-     				<input type="text" id="date" name="date" value="{{station.date}}">
-     			</td>
-     			<td>
-     				Time:
-     			</td>
-     			<td>
-     				<input type="text" id="time" name="time" value="{{station.time}}">
-     			</td>
-     		</tr>
+     		
      		<tr >
      			<td>
      				Temperature:
      			</td>
      			<td>
      				<input type="text" id="temperature" name="temperature" value="{{station.temperature}}">
+     				(°C)
      			</td>
      			<td>
      				Humidity:
      			</td>
      			<td>
      				<input type="text" id="humidity" name="humidity" value="{{station.humidity}}">
+     				(%)
      			</td>
      		</tr>
      		<tr >
@@ -119,6 +108,7 @@
      			</td>
      			<td>
      				<input type="text" id="wind" name="wind" value="{{station.wind}}">
+     				(m/s)
      			</td>
      			<td>
      				Wind Direction:
@@ -133,12 +123,14 @@
      			</td>
      			<td>
      				<input type="text" id="cloudAltitude" name="cloudAltitude" value="{{station.cloudAltitude}}">
+     				(m)
      			</td>
      			<td>
      				Cloud Coverage:
      			</td>
      			<td>
      				<input type="text" id="cloudCoverage" name="cloudCoverage" value="{{station.cloudCoverage}}">
+     				(octas)
      			</td>
      		</tr>
      		<tr >
@@ -153,6 +145,7 @@
      			</td>
      			<td>
      				<input type="text" id="airPressure" name="airPressure" value="{{station.airPressure}}">
+     				(hPa)
      			</td>
      		</tr>
      		<tr >
@@ -161,6 +154,7 @@
      			</td>
      			<td>
      				<input type="text" id="precipitation" name="precipitation" value="{{station.precipitation}}">
+     				(mm/h)
      			</td>
      			<td colspan="2">
      				<input type="button" name="" value="UPDATE" ng-click="updateData()">

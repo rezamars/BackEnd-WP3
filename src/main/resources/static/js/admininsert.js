@@ -19,6 +19,16 @@ myWeatherApp.controller('mainController', function($scope,$http) {
 		$scope.stName = inName;
 	}
 	
+	//get current date and store it in date field
+	$scope.dateInput = function () {
+		document.getElementById('date').value = getDate();
+	}
+	
+	//get current time and store it in time field
+	$scope.timeInput = function () {
+		document.getElementById('time').value = getTime();
+	}
+	
 	$scope.stationDataList = new Array();
 	$scope.stationorg = new Array();
 	
@@ -80,7 +90,6 @@ myWeatherApp.controller('mainController', function($scope,$http) {
      });
     	
     }
-    
 });
 
 //a function that removes dublicate names of stations
@@ -114,4 +123,29 @@ function removeDub(array){
 	return newstationDataList;
 }
 
+//get the current date in desired form
+function getDate(){
+	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; //January is 0!
+	var yyyy = today.getFullYear();
 
+	if(dd<10) {
+	    dd='0'+dd
+	} 
+
+	if(mm<10) {
+	    mm='0'+mm
+	} 
+
+	today = yyyy+'-'+mm+'-'+dd;
+	return today;
+}
+
+//get current time in desired form
+function getTime(){
+	var time = new Date().toLocaleTimeString('en-US', { hour12: false, 
+        hour: "numeric", 
+        minute: "numeric"});
+	return time;
+}

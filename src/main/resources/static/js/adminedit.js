@@ -61,8 +61,8 @@ myWeatherApp.controller('mainController', function($scope,$http) {
     	var objToSaveInDB = orgDataList[indexId];
     	
     	//get all the new values and store them
-    	objToSaveInDB.date = document.getElementById('date').value;
-    	objToSaveInDB.time = document.getElementById('time').value;
+    	//objToSaveInDB.date = dorgDataList[indexId].date;
+    	//objToSaveInDB.time = orgDataList[indexId].time;
     	objToSaveInDB.temperature = document.getElementById('temperature').value;
     	objToSaveInDB.humidity = document.getElementById('humidity').value;
     	objToSaveInDB.wind = document.getElementById('wind').value;

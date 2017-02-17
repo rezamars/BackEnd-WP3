@@ -27,7 +27,7 @@
     <button class="btn btn-default" type="logout">Logout</button>
     <button class="btn btn-default" type="clear">CLEAR</button>
     <a href="adminedit.html">Admin Edit</a>
-    <a href="admincreatenew.html">Admin Create</a>
+    <a href="admininsert.html">Admin Insert</a>
 </header>
 
 <div ng-app="myWeatherApp">
@@ -52,8 +52,6 @@
 <div class="container" ng-app="sortApp" ng-controller="mainController">
 
     <div class="alert alert-info">
-        <p>Sort Type: {{ sortType }}</p>
-        <p>Sort Reverse: {{ sortReverse }}</p>
         <p>Search Query: {{ searchStation }}</p>
     </div>
 
@@ -62,10 +60,10 @@
             <div class="input-group">
                 <div class="input-group-add-on"><i class="fa fa-search"></i></div>
                 
-                <input type="text"  id="search1" placeholder="Search..." ng-model="searchStation[selectedSearch]" >
+                <input type="text"  id="search1" placeholder="Search..." ng-model="searchStation" >
 				<br>
                 <input type="radio" id="radio-station-id" name="radiogroup" value="smhiID" ng-model="selectedSearch"> Station Id
-                <input type="radio" id="radio-station-name" name="radiogroup" value="stationName" ng-model="selectedSearch" > Station Name
+                <input type="radio" id="radio-station-name" name="radiogroup"  value="stationName" ng-model="selectedSearch"> Station Name
 				<input type="radio" id="radio-station-date" name="radiogroup" value="date" ng-model="selectedSearch"> Date
 				<input type="radio" id="radio-station-time" name="radiogroup" value="time" ng-model="selectedSearch"> Time
 				<input type="radio" id="radio-station-temperature" name="radiogroup" value="temperature" ng-model="selectedSearch"> Temperature
@@ -86,9 +84,8 @@
            </div>
         </div>
     </form>
+    <div style="height:500px;overflow:auto;">
     <table class="table table-bordered table-striped">
-
-
         <thead>
         <tr>
             <td>
@@ -191,20 +188,20 @@
             <td>{{ station.stationName }}</td>
             <td>{{ station.date }}</td>
             <td>{{ station.time }}</td>
-            <td>{{ station.temperature }} (C)</td>
+            <td>{{ station.temperature }} (°C)</td>
             <td>{{ station.humidity }} (%)</td>
-            <td>{{ station.wind }} (M/s)</td>
+            <td>{{ station.wind }} (m/s)</td>
             <td>{{ station.windDirection }}</td>
-            <td>{{ station.cloudAltitude }} (M)</td>
-            <td>{{ station.cloudCoverage }} (%)</td>
+            <td>{{ station.cloudAltitude }} (m)</td>
+            <td>{{ station.cloudCoverage }} (octas)</td>
             <td>{{ station.cloudTypes }}</td>
-            <td>{{ station.airPressure }} (mBar)</td>
-            <td>{{ station.precipitation }}(ml)</td>
+            <td>{{ station.airPressure }} (hPa)</td>
+            <td>{{ station.precipitation }} (mm/h)</td>
         </tr>
         </tbody>
 
     </table>
-
+	</div>
 </div>
 
 
