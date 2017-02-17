@@ -15,3 +15,19 @@ article {
     padding: 1em;
     overflow: hidden;
 }
+
+h1{
+	text-align: center;
+}
+button{
+	margin-top: 75px;
+    margin-right: 50px;
+	position:absolute;
+    top:0;
+    right:0;
+}
+
+div.temp{
+	text-align: left;
+	margin-left: 50px;
+}
