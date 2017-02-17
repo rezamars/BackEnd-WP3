@@ -24,6 +24,7 @@
 <div ng-app="myWeatherApp">
 	<div class="container" ng-app="sortApp" ng-controller="mainController">
 	<nav>
+	<div style="height:350px;overflow:auto;">
 		<table class="table table-bordered table-striped">
         	<thead>
         		<tr>
@@ -45,6 +46,7 @@
         </tbody>
 
     </table>
+    </div>
     </nav>
   	
   	<div ng-show="shouldShow">

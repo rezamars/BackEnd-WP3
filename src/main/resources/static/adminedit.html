@@ -21,9 +21,10 @@
     <<a href="home">Back</a>
 </header>
 
-<div ng-app="myWeatherApp">
+<div ng-app="myWeatherApp" >
 	<div class="container" ng-app="sortApp" ng-controller="mainController">
-	<nav>
+	<nav >
+	<div style="height:350px;overflow:auto;">
 		<table class="table table-bordered table-striped">
         	<thead>
         		<tr>
@@ -45,6 +46,7 @@
         </tbody>
 
     </table>
+    </div>
     </nav>
     
     <article>

@@ -13,6 +13,7 @@ import javax.persistence.Persistence;
 
 
 
+
 public class DBService3 {
 	
 private String message = "ERROR!";
@@ -26,11 +27,20 @@ private String message = "ERROR!";
       EntityManager entitymanager = emfactory.createEntityManager( );
       entitymanager.getTransaction( ).begin( );
       
-      Date date = new Date();
-      Calendar cal = Calendar.getInstance(); // creates calendar
-	  cal.setTime(date); // sets calendar time/date
-	  cal.add(Calendar.HOUR_OF_DAY, 3); // adds one hour
       
+      AdminData ad = new AdminData();
+      ad.setAdminId(1);
+      ad.setAdminName("admin");
+      ad.setAdminPassword("password");
+      
+      entitymanager.persist(ad);
+      entitymanager.getTransaction().commit();
+      entitymanager.close();
+      emfactory.close();
+      
+      EntityManagerFactory emfactory2 = Persistence.createEntityManagerFactory( "Eclipselink_JPA" );
+      EntityManager entitymanager2 = emfactory2.createEntityManager( );
+      entitymanager2.getTransaction( ).begin( );
       
       WeatherData wd = new WeatherData();
       wd.setId(0);
@@ -147,22 +157,24 @@ private String message = "ERROR!";
       
       
     //storing all entities
-      entitymanager.persist(wd);
-      entitymanager.persist(wd2);
-      entitymanager.persist(wd3);
-      entitymanager.persist(wd4);
-      entitymanager.persist(wd5);
-      entitymanager.persist(wd6);
-      entitymanager.persist(wd7);
       
-      entitymanager.getTransaction().commit();
-      entitymanager.close();
-      emfactory.close();
+      entitymanager2.persist(wd);
+      entitymanager2.persist(wd2);
+      entitymanager2.persist(wd3);
+      entitymanager2.persist(wd4);
+      entitymanager2.persist(wd5);
+      entitymanager2.persist(wd6);
+      entitymanager2.persist(wd7);
+      
+      entitymanager2.getTransaction().commit();
+      entitymanager2.close();
+      emfactory2.close();
       
       message = "Create and initialization of DB succesful!";
       
 	}
 	catch(Exception e){
+		System.out.print("ERROR-message: " + e.getMessage());
 		message = "ERROR!";
 	}
       

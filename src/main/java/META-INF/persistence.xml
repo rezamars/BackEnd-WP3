@@ -6,7 +6,7 @@
 	<persistence-unit name="Eclipselink_JPA"
 		transaction-type="RESOURCE_LOCAL">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-		<class>com.programmingfree.springservice.Station</class>
+		<class>com.programmingfree.springservice.AdminData</class>
 		<class>com.programmingfree.springservice.WeatherData</class>
 
 		<properties>
