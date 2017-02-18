@@ -83,6 +83,7 @@ myWeatherApp.controller('mainController', function($scope,$http) {
     	
     	//post request to store the data in database
     	$http.post(('/weatherDatas'),objToSaveInDB).success(function (data) {
+    		location.reload();
     		alert('Successfully created new data!')
             
         }).error(function (status) {

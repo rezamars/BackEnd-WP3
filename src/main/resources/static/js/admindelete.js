@@ -56,30 +56,17 @@ myWeatherApp.controller('mainController', function($scope,$http) {
         alert(status);
     });
     
-    $scope.updateData = function updateData() {
+    $scope.deleteData = function deleteData() {
     
     	//an object to hold the new entries the admin types in admin-edit page
     	var objToSaveInDB = orgDataList[indexId];
     	
-    	//get all the new values and store them
-    	//objToSaveInDB.date = dorgDataList[indexId].date;
-    	//objToSaveInDB.time = orgDataList[indexId].time;
-    	objToSaveInDB.temperature = document.getElementById('temperature').value;
-    	objToSaveInDB.humidity = document.getElementById('humidity').value;
-    	objToSaveInDB.wind = document.getElementById('wind').value;
-    	objToSaveInDB.windDirection = document.getElementById('windDirection').value;
-    	objToSaveInDB.cloudAltitude = document.getElementById('cloudAltitude').value;
-    	objToSaveInDB.cloudCoverage = document.getElementById('cloudCoverage').value;
-    	objToSaveInDB.cloudTypes = document.getElementById('cloudTypes').value;
-    	objToSaveInDB.airPressure = document.getElementById('airPressure').value;
-    	objToSaveInDB.precipitation = document.getElementById('precipitation').value;
-    	
-    	//put request
-    	$http.put(('/weatherDatas/' + indexInJson),objToSaveInDB).success(function (data) {
-    		//$scope.shouldShow =  (false);
+    	//delete request
+    	$http.delete(('/weatherDatas/' + indexInJson),objToSaveInDB).success(function (data) {
+    		
     		location.reload();
-    		alert('Successfully updated!')
-            
+    		alert('Successfully deleted!')
+    		
         }).error(function (status) {
             alert(status);    
      });
@@ -149,13 +136,15 @@ function select2($scope,$http) {
 					if(data._embedded.weatherDatas[i].date == indexDate){
 						$scope.specificPost.push(data._embedded.weatherDatas[i]);
 						indexId = i;
+						
 					}
 				}
 				
 			}
     	}
 		indexInJson = /[^/]*$/.exec(data._embedded.weatherDatas[indexId]._links.self.href)[0];
-	
+		
+		
 	}).error(function (status) {
 		alert(status);
 	});
