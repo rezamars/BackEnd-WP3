@@ -31,3 +31,10 @@ div.temp{
 	text-align: left;
 	margin-left: 50px;
 }
+
+input.buttonAct{
+	display: block;
+	margin: auto;
+	background-color: lightblue;
+	color: red;
+}

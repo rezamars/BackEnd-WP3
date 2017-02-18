@@ -58,6 +58,8 @@ myWeatherApp.controller('mainController', function($scope,$http) {
     
     $scope.deleteData = function deleteData() {
     
+    	var userSelection = confirm("Do you really want to delete this?");
+    	if (userSelection == true) {
     	//an object to hold the new entries the admin types in admin-edit page
     	var objToSaveInDB = orgDataList[indexId];
     	
@@ -70,7 +72,10 @@ myWeatherApp.controller('mainController', function($scope,$http) {
         }).error(function (status) {
             alert(status);    
      });
-    	
+    	}
+    	else{
+    		
+    	}
     }
     
 });

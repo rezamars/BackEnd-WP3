@@ -12,10 +12,5 @@ public class HomeController {
 	public String home() {
 		return "index";
 	}
-	/*
-	@RequestMapping(method=RequestMethod.GET)
-	public String getDataFromDB(){
-		return "Hejsan hoppsan!";
-	}
-	*/
+
 }
