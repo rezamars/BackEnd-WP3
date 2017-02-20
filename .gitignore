@@ -2,6 +2,6 @@
 
 .idea/*
 
-src/main/java/META-INF/persistence.xml
-src/main/resources/META-INF/persistence.xml
+src/main/java/META-INF/*
+src/main/resources/META-INF/*
 src/main/resources/application.properties
