@@ -2,6 +2,5 @@
 
 .idea/*
 
-src/main/java/META-INF/*
-src/main/resources/META-INF/*
+**/META-INF/*
 src/main/resources/application.properties
