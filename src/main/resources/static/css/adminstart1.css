@@ -1,0 +1,24 @@
+
+div.container {
+    width: 100%;
+}
+
+article {
+    text-align:center;
+}
+
+h1{
+	text-align: center;
+}
+button{
+	margin-top: 75px;
+    margin-right: 50px;
+	position:absolute;
+    top:0;
+    right:0;
+}
+
+div.temp{
+	text-align: left;
+	margin-left: 50px;
+}
