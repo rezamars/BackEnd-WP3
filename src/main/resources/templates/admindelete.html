@@ -1,33 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Insert page</title>
+    <title>Admin Delete page</title>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular-route.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     
-    <script type="text/javascript" src="js/admininsert.js"></script>
+    <script type="text/javascript" src="js/admindelete.js"></script>
     
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/sandstone/bootstrap.min.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-	<link href='./css/admin.css' rel="stylesheet" type="text/css" />
+	<link href='css/admin.css' rel="stylesheet" type="text/css" />
 </head>
 <body>
 <header>
-    <h1>SMHI Admin Insert</h1>
+    <h1>SMHI Admin Delete</h1>
     <button class="btn btn-logout" type="logout">Logout</button>
     <div class="temp">
-    	<form action="adminstart.html">
+    	<a th:href="@{/adminstart1}">
     		<input class="btn btn-default" type="submit" value="Admin start" />
-		</form>
+		</a>
 	</div>
 </header>
 
-<div ng-app="myWeatherApp">
+<div ng-app="myWeatherApp" >
 	<div class="container" ng-app="sortApp" ng-controller="mainController">
-	<nav>
+	<nav >
 	<div style="height:350px;overflow:auto;">
 		<table class="table table-bordered table-striped">
         	<thead>
@@ -42,7 +42,7 @@
      		</thead>
      	<tbody>
      		<div class="menu">
-        	<tr ng-repeat="station in stationDataList" >
+        	<tr ng-repeat="station in station" >
             	<td> {{ station.smhiID }}</td>
             	<td ><a href=""  ng-click="open(station.stationName)" onclick="">{{ station.stationName }}</a></td>
         	</tr>
@@ -52,47 +52,59 @@
     </table>
     </div>
     </nav>
-  	
-  	<div ng-show="shouldShow">
-  	<article>
-  		<table class="table table-bordered table-striped" >
+    
+    <article>
+		<table class="table table-bordered table-striped">
         	<thead>
         		<tr>
-    				<td colspan="4">
-            			{{stName}}
+    				<td>
+            			Station Name
+    				</td>
+    				<td>
+            			Date
+    				</td>
+    				<td>
+            			Time
     				</td>
         		</tr>
      		</thead>
      	<tbody>
-     		<tr >
-     			<td>
-     				Date:
-     			</td>
-     			<td>
-     				<input type="text" id="date" name="date" value="">
-     				<input type="button" id="datebutton" value="Get curr date" ng-click="dateInput()">
-     			</td>
-     			<td>
-     				Time:
-     			</td>
-     			<td>
-     				<input type="text" id="time" name="time" value="">
-     				<input type="button" id="timebutton" value="Get curr time" ng-click="timeInput()">
-     			</td>
-     		</tr>
+        	<tr ng-repeat="station in specificStationData">
+            	
+            	<td >{{ station.stationName }}</td>
+            	<td>{{ station.date }}</td>
+            	<td><a href=""  ng-click="getPost(station.id,station.stationName,station.time,station.date)" onclick="">{{ station.time }}</td>
+        	</tr>
+        </tbody>
+
+    	</table>
+  	</article>
+  	
+  	<div ng-show="shouldShow">
+  	<article>
+  		<table class="table table-bordered table-striped" ng-repeat="station in specificPost">
+        	<thead>
+        		<tr>
+    				<td colspan="4">
+            			{{station.stationName}}  ( {{station.date}} ,  {{station.time}} )
+    				</td>
+        		</tr>
+     		</thead>
+     	<tbody>
+     		
      		<tr >
      			<td>
      				Temperature:
      			</td>
      			<td>
-     				<input type="text" id="temperature" name="temperature" value="">
+     				<input type="text" id="temperature" name="temperature" value="{{station.temperature}}">
      				(°C)
      			</td>
      			<td>
      				Humidity:
      			</td>
      			<td>
-     				<input type="text" id="humidity" name="humidity" value="">
+     				<input type="text" id="humidity" name="humidity" value="{{station.humidity}}">
      				(%)
      			</td>
      		</tr>
@@ -101,14 +113,14 @@
      				Wind:
      			</td>
      			<td>
-     				<input type="text" id="wind" name="wind" value="">
+     				<input type="text" id="wind" name="wind" value="{{station.wind}}">
      				(m/s)
      			</td>
      			<td>
      				Wind Direction:
      			</td>
      			<td>
-     				<input type="text" id="windDirection" name="windDirection" value="">
+     				<input type="text" id="windDirection" name="windDirection" value="{{station.windDirection}}">
      			</td>
      		</tr>
      		<tr >
@@ -116,14 +128,14 @@
      				Cloud Altitude:
      			</td>
      			<td>
-     				<input type="text" id="cloudAltitude" name="cloudAltitude" value="">
+     				<input type="text" id="cloudAltitude" name="cloudAltitude" value="{{station.cloudAltitude}}">
      				(m)
      			</td>
      			<td>
      				Cloud Coverage:
      			</td>
      			<td>
-     				<input type="text" id="cloudCoverage" name="cloudCoverage" value="">
+     				<input type="text" id="cloudCoverage" name="cloudCoverage" value="{{station.cloudCoverage}}">
      				(octas)
      			</td>
      		</tr>
@@ -132,13 +144,13 @@
      				Cloud Types:
      			</td>
      			<td>
-     				<input type="text" id="cloudTypes" name="cloudTypes" value="">
+     				<input type="text" id="cloudTypes" name="cloudTypes" value="{{station.cloudTypes}}">
      			</td>
      			<td>
      				Air Pressure:
      			</td>
      			<td>
-     				<input type="text" id="airPressure" name="airPressure" value="">
+     				<input type="text" id="airPressure" name="airPressure" value="{{station.airPressure}}">
      				(hPa)
      			</td>
      		</tr>
@@ -147,11 +159,11 @@
      				Precipitation:
      			</td>
      			<td>
-     				<input type="text" id="precipitation" name="precipitation" value="">
+     				<input type="text" id="precipitation" name="precipitation" value="{{station.precipitation}}">
      				(mm/h)
      			</td>
      			<td colspan="2">
-     				<input type="button" class="buttonAct" name="" value="INSERT" ng-click="createData()">
+     				<input type="button" class="buttonAct" name="" value="DELETE" ng-click="deleteData()">
      			</td>
      			
      		</tr>

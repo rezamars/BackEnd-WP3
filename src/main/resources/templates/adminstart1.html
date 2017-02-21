@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Start page</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular-route.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/sandstone/bootstrap.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <link href='css/adminstart1.css' rel="stylesheet" type="text/css"/>
+
+</head>
+<body>
+<header>
+    <h1>SMHI Admin Start Page</h1>
+    <form th:action="@{/logout}" method="post">
+        <button class="btn btn-logout" type="logout" value="Sign Out">Logout</button>
+    </form>
+    <div class="temp">
+        <a th:href="@{/}">
+            <input class="btn btn-default" type="submit" value="Index-page"/>
+        </form>
+    </div>
+</header>
+
+<article id="adminstartar">
+    <h2>What would you like to do?</h2>
+    <br>
+    <a th:href="@{/adminedit}">
+        <input class="btn btn-default" type="submit" value="Edit post"/>
+    </a>
+    <br>
+    <a th:href="@{/admininsert}">
+        <input class="btn btn-default" type="submit" value="Insert post"/>
+    </a>
+    <br>
+    <a th:href="@{/admindelete}">
+        <input class="btn btn-default" type="submit" value="Delete post"/>
+    </a>
+</article>
+
+</body>
+</html>
