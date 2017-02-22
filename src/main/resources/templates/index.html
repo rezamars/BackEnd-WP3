@@ -42,7 +42,9 @@
 
 
     <div class="container" ng-app="sortApp" ng-controller="mainController">
-
+		
+		
+		
         <div class="alert alert-info">
             <p>Search Query: {{ searchInput }}</p>
         </div>
@@ -50,10 +52,10 @@
         <form id="myForm">
             <div class="form-group">
                 <div class="input-group">
-                    <div class="input-group-add-on"><i class="fa fa-search"></i></div>
+                    <div class="input-group-add-on"></div>
 
                     <input type="text" id="search1" placeholder="Search..." ng-model="searchInput[sel]" >
-                    
+                    <i class="fa fa-search"></i>
 					<select ng-model="sel" ng-change="selectChan()" class="selectClass">
 						<option value="stationName" >By stationName</option>
 						<option value="smhiID"  >By SMHI-Id</option>
@@ -74,6 +76,22 @@
                 </div>
             </div>
         </form>
+        
+        <div class="hideElements">
+		<input type = "checkbox" ng-model="hideDate" /> Hide Date
+		<input type = "checkbox" ng-model="hideTime" /> Hide Time
+		<input type = "checkbox" ng-model="hideTemperature" /> Hide Temperature
+		<input type = "checkbox" ng-model="hideHumidity" /> Hide Humidity
+		<input type = "checkbox" ng-model="hideWind" /> Hide Wind
+		<input type = "checkbox" ng-model="hideWindDirection" /> Hide WindDirection
+		<br>
+		<input type = "checkbox" ng-model="hideCloudAltitude" /> Hide CloudAltitude
+		<input type = "checkbox" ng-model="hideCloudCoverage" /> Hide CloudCoverage
+		<input type = "checkbox" ng-model="hideCloudTypes" /> Hide CloudTypes
+		<input type = "checkbox" ng-model="hideAirPressure" /> Hide AirPressure
+		<input type = "checkbox" ng-model="hidePrecipitation" /> Hide Precipitation
+		</div>
+        
         <div style="height:500px;overflow:auto;">
             <table class="table table-bordered table-striped">
                 <thead>
@@ -92,77 +110,77 @@
                             <span ng-show="sortType == 'stationName' && sortReverse" class="fa fa-caret-up"></span>
                         </a>
                     </td>
-                    <td>
+                    <td ng-hide="hideDate">
                         <a href="#" ng-click="sortType = 'date'; sortReverse = !sortReverse">
                             Date
                             <span ng-show="sortType == 'date' && !sortReverse" class="fa fa-caret-down"></span>
                             <span ng-show="sortType == 'date' && sortReverse" class="fa fa-caret-up"></span>
                         </a>
                     </td>
-                    <td>
+                    <td ng-hide="hideTime">
                         <a href="#" ng-click="sortType = 'time'; sortReverse = !sortReverse">
                             Time
                             <span ng-show="sortType == 'time' && !sortReverse" class="fa fa-caret-down"></span>
                             <span ng-show="sortType == 'time' && sortReverse" class="fa fa-caret-up"></span>
                         </a>
                     </td>
-                    <td>
+                    <td ng-hide="hideTemperature">
                         <a href="#" ng-click="sortType = 'temperature'; sortReverse = !sortReverse">
                             Temperature
                             <span ng-show="sortType == 'temperature' && !sortReverse" class="fa fa-caret-down"></span>
                             <span ng-show="sortType == 'temperature' && sortReverse" class="fa fa-caret-up"></span>
                         </a>
                     </td>
-                    <td>
+                    <td ng-hide="hideHumidity">
                         <a href="#" ng-click="sortType = 'humidity'; sortReverse = !sortReverse">
                             Humidity
                             <span ng-show="sortType == 'humidity' && !sortReverse" class="fa fa-caret-down"></span>
                             <span ng-show="sortType == 'humidity' && sortReverse" class="fa fa-caret-up"></span>
                         </a>
                     </td>
-                    <td>
+                    <td ng-hide="hideWind">
                         <a href="#" ng-click="sortType = 'wind'; sortReverse = !sortReverse">
                             Wind
                             <span ng-show="sortType == 'wind' && !sortReverse" class="fa fa-caret-down"></span>
                             <span ng-show="sortType == 'wind' && sortReverse" class="fa fa-caret-up"></span>
                         </a>
                     </td>
-                    <td>
+                    <td ng-hide="hideWindDirection">
                         <a href="#" ng-click="sortType = 'windDirection'; sortReverse = !sortReverse">
                             Wind Direction
                             <span ng-show="sortType == 'windDirection' && !sortReverse" class="fa fa-caret-down"></span>
                             <span ng-show="sortType == 'windDirection' && sortReverse" class="fa fa-caret-up"></span>
                         </a>
                     </td>
-                    <td>
+                    <td ng-hide="hideCloudAltitude">
                         <a href="#" ng-click="sortType = 'cloudAltitude'; sortReverse = !sortReverse">
                             Cloud Altitude
                             <span ng-show="sortType == 'cloudAltitude' && !sortReverse" class="fa fa-caret-down"></span>
                             <span ng-show="sortType == 'cloudAltitude' && sortReverse" class="fa fa-caret-up"></span>
                         </a>
                     </td>
-                    <td>
+                    <td ng-hide="hideCloudCoverage">
                         <a href="#" ng-click="sortType = 'cloudCoverage'; sortReverse = !sortReverse">
                             Cloud Coverage
                             <span ng-show="sortType == 'cloudCoverage' && !sortReverse" class="fa fa-caret-down"></span>
                             <span ng-show="sortType == 'cloudCoverage' && sortReverse" class="fa fa-caret-up"></span>
                         </a>
                     </td>
-                    <td>
+                    <td ng-hide="hideCloudTypes">
                         <a href="#" ng-click="sortType = 'cloudTypes'; sortReverse = !sortReverse">
                             Cloud Types
                             <span ng-show="sortType == 'cloudTypes' && !sortReverse" class="fa fa-caret-down"></span>
                             <span ng-show="sortType == 'cloudTypes' && sortReverse" class="fa fa-caret-up"></span>
                         </a>
                     </td>
-                    <td>
+                    <td ng-hide="hideAirPressure">
                         <a href="#" ng-click="sortType = 'airPressure'; sortReverse = !sortReverse">
                             Air Pressure
                             <span ng-show="sortType == 'airPressure' && !sortReverse" class="fa fa-caret-down"></span>
                             <span ng-show="sortType == 'airPressure' && sortReverse" class="fa fa-caret-up"></span>
                         </a>
                     </td>
-                    <td>
+                    <td ng-hide="hidePrecipitation">
                         <a href="#" ng-click="sortType = 'precipitation'; sortReverse = !sortReverse">
                             Precipitation
                             <span ng-show="sortType == 'precipitation' && !sortReverse" class="fa fa-caret-down"></span>
@@ -176,17 +194,17 @@
                 <tr ng-repeat="station in stationDataList | orderBy:sortType:sortReverse | filter:searchInput ">
                     <td>{{ station.smhiID }}</td>
                     <td>{{ station.stationName }}</td>
-                    <td>{{ station.date }}</td>
-                    <td>{{ station.time }}</td>
-                    <td>{{ station.temperature }} (°C)</td>
-                    <td>{{ station.humidity }} (%)</td>
-                    <td>{{ station.wind }} (m/s)</td>
-                    <td>{{ station.windDirection }}</td>
-                    <td>{{ station.cloudAltitude }} (m)</td>
-                    <td>{{ station.cloudCoverage }} (octas)</td>
-                    <td>{{ station.cloudTypes }}</td>
-                    <td>{{ station.airPressure }} (hPa)</td>
-                    <td>{{ station.precipitation }} (mm/h)</td>
+                    <td ng-hide="hideDate">{{ station.date }}</td>
+                    <td ng-hide="hideTime">{{ station.time }}</td>
+                    <td ng-hide="hideTemperature">{{ station.temperature }} (°C)</td>
+                    <td ng-hide="hideHumidity">{{ station.humidity }} (%)</td>
+                    <td ng-hide="hideWind">{{ station.wind }} (m/s)</td>
+                    <td ng-hide="hideWindDirection">{{ station.windDirection }}</td>
+                    <td ng-hide="hideCloudAltitude">{{ station.cloudAltitude }} (m)</td>
+                    <td ng-hide="hideCloudCoverage">{{ station.cloudCoverage }} (octas)</td>
+                    <td ng-hide="hideCloudTypes">{{ station.cloudTypes }}</td>
+                    <td ng-hide="hideAirPressure">{{ station.airPressure }} (hPa)</td>
+                    <td ng-hide="hidePrecipitation">{{ station.precipitation }} (mm/h)</td>
                 </tr>
                 </tbody>
 

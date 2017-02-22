@@ -18,3 +18,11 @@ div.temp{
 .selectClass{
 	height: 25px;
 }
+
+input[type='checkbox'] {
+	margin: 10px;
+}
+
+select {
+	margin-left: 10px;
+}
