@@ -1,6 +1,6 @@
 package com.programmingfree.springservice;
 
-import com.programmingfree.springservice.WeatherData.Station;
+import com.programmingfree.springservice.entities.WeatherData.Station;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;

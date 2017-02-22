@@ -1,5 +1,6 @@
 package com.programmingfree.springservice;
 
+import com.programmingfree.springservice.entities.WeatherData;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 

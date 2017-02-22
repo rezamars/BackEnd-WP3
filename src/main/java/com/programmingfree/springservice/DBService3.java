@@ -1,6 +1,9 @@
 package com.programmingfree.springservice;
 
 
+import com.programmingfree.springservice.entities.Role;
+import com.programmingfree.springservice.entities.User;
+import com.programmingfree.springservice.entities.WeatherData;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -23,11 +26,18 @@ private String message = "ERROR!";
       entitymanager.getTransaction( ).begin( );
       
       
-      AdminData ad = new AdminData();
-      ad.setAdminId(1);
-      ad.setAdminName("admin");
-      ad.setAdminPassword("password");
-      
+      User ad = new User();
+      ad.setId(1);
+      ad.setUsername("admin");
+      ad.setUserPassword("password");
+      ad.setEnabled(true);
+
+      Role role = new Role();
+      role.setId(1);
+      role.setUsername("admin");
+      role.setUserRole("ADMIN");
+
+      entitymanager.persist(role);
       entitymanager.persist(ad);
       entitymanager.getTransaction().commit();
       entitymanager.close();

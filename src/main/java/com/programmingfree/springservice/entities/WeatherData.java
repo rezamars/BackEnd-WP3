@@ -1,4 +1,4 @@
-package com.programmingfree.springservice;
+package com.programmingfree.springservice.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
