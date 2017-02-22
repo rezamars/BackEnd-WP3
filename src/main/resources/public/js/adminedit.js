@@ -7,8 +7,15 @@ var indexDate = -1;
 var timePar2;
 var indexInJson = -1;
 
-var myWeatherApp = angular.module('myWeatherApp', []);
+var myWeatherApp = angular.module('myWeatherApp', ['ngMaterial','ngMessages']);
 
+myWeatherApp.controller('mainController', function($scope) {
+	$scope.myDate = new Date();
+	$scope.maxDate = new Date($scope.myDate.getFullYear(), 
+			$scope.myDate.getMonth(), 
+			$scope.myDate.getDate());
+			}).config(function($mdDateLocaleProvider) {
+				$mdDateLocaleProvider.firstDayOfWeek = 1;});
 
 myWeatherApp.controller('mainController', function($scope,$http) {
     
@@ -160,5 +167,4 @@ function select2($scope,$http) {
 		alert(status);
 	});
 }
-
 
