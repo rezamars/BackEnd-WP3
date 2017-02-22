@@ -44,7 +44,7 @@
     <div class="container" ng-app="sortApp" ng-controller="mainController">
 
         <div class="alert alert-info">
-            <p>Search Query: {{ searchStation }}</p>
+            <p>Search Query: {{ searchInput }}</p>
         </div>
 
         <form id="myForm">
@@ -52,9 +52,24 @@
                 <div class="input-group">
                     <div class="input-group-add-on"><i class="fa fa-search"></i></div>
 
-                    <input type="text" id="search1" placeholder="Search..." ng-model="searchStation">
-                    <br>
-
+                    <input type="text" id="search1" placeholder="Search..." ng-model="searchInput[sel]" >
+                    
+					<select ng-model="sel" ng-change="selectChan()" class="selectClass">
+						<option value="stationName" >By stationName</option>
+						<option value="smhiID"  >By SMHI-Id</option>
+						<option value="date" >By Date</option>
+						<option value="time"  >By Time</option>
+						<option value="temperature" >By Temperature</option>
+						<option value="humidity"  >By Humidity</option>
+						<option value="wind" >By Wind</option>
+						<option value="windDirection"  >By Wind Direction</option>
+						<option value="cloudAltitude" >By Cloud Altitude</option>
+						<option value="cloudCoverage"  >By Cloud Coverage</option>
+						<option value="cloudTypes" >By Cloud Types</option>
+						<option value="airPressure"  >By Air Pressure</option>
+						<option value="precipitation" >By Precipitation</option>
+					</select>
+					<br>
                     <br>
                 </div>
             </div>
@@ -158,7 +173,7 @@
                 </thead>
 
                 <tbody>
-                <tr ng-repeat="station in stationDataList | orderBy:sortType:sortReverse | filter:searchStation">
+                <tr ng-repeat="station in stationDataList | orderBy:sortType:sortReverse | filter:searchInput ">
                     <td>{{ station.smhiID }}</td>
                     <td>{{ station.stationName }}</td>
                     <td>{{ station.date }}</td>

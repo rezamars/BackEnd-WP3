@@ -69,6 +69,17 @@ myWeatherApp.controller('mainController', function($scope,$http) {
     //$scope.sortReverse  = false;  // set the default sort order
     $scope.searchStation   = '';     // set the default search/filter term
     
+    $scope.selectChan = function () {
+    	if(document.getElementById('search1').value != ''){
+    		//document.getElementById('search1').value = '';
+    	}
+    	$scope.searchInput = '';
+    	//location.reload();
+    	//alert(document.getElementById('search1').value);
+    	//document.getElementById('search1').value = '';
+    	
+    }
+    
 	$scope.stationDataList = new Array();
 	
     $http.get("/weatherDatas").success(function (data) {
@@ -85,4 +96,6 @@ myWeatherApp.controller('mainController', function($scope,$http) {
     });
 });
 
-
+function selectCh(){
+	
+}

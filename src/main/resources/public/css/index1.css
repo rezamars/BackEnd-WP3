@@ -14,3 +14,7 @@ button{
 div.temp{
 	text-align: center;
 }
+
+.selectClass{
+	height: 25px;
+}
