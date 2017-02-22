@@ -6,14 +6,14 @@ import javax.persistence.*;
  * Created by root on 2/22/17.
  */
 @Entity
-@Table(name = "role")
+@Table(name = "roles")
 public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "user_role")
+    @Column(name = "role")
     private String userRole;
 
     private String username;
