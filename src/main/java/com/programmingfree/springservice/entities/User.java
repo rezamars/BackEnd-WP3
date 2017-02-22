@@ -3,7 +3,7 @@ package com.programmingfree.springservice.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
 
     @Id

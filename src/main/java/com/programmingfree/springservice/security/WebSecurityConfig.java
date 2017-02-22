@@ -1,4 +1,4 @@
-package com.programmingfree.springservice;
+package com.programmingfree.springservice.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -40,7 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource)
                 .usersByUsernameQuery(
-                        "select username, user_password, enabled from user where username=?")
+                        "select username, user_password, enabled from users where username=?")
                 .authoritiesByUsernameQuery(
                         "select username, role from roles where username=?");
     }
