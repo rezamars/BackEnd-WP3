@@ -7,15 +7,17 @@ var indexDate = -1;
 var timePar2;
 var indexInJson = -1;
 
-var myWeatherApp = angular.module('myWeatherApp', ['ngMaterial','ngMessages']);
+var myWeatherApp = angular.module('myWeatherApp', ['ngMaterial']);
 
-myWeatherApp.controller('mainController', function($scope) {
-	$scope.myDate = new Date();
-	$scope.maxDate = new Date($scope.myDate.getFullYear(), 
-			$scope.myDate.getMonth(), 
-			$scope.myDate.getDate());
+myWeatherApp.controller('dateController', function($scope) {
+	myDate =  new Date;
+	$scope.maxDate = new Date(
+			myDate.getFullYear(), 
+			myDate.getMonth(), 
+			myDate.getDate());
 			}).config(function($mdDateLocaleProvider) {
 				$mdDateLocaleProvider.firstDayOfWeek = 1;});
+
 
 myWeatherApp.controller('mainController', function($scope,$http) {
     
@@ -26,6 +28,8 @@ myWeatherApp.controller('mainController', function($scope,$http) {
 		$scope.shouldShow =  (false);
 		indexName = inName;
 		select1($scope,$http);
+		console.log('select1');
+
 	}
 	
 	//save name of station in indexName getting the name from click on page
@@ -131,10 +135,11 @@ function removeDub(array){
 function select1($scope,$http) {
 	
 	$scope.specificStationData = new Array();
+	
 	$http.get("/weatherDatas").success(function (data) {
 		
 		for(var i = 0 ; i<data._embedded.weatherDatas.length ; i++){
-			if(data._embedded.weatherDatas[i].stationName == indexName){
+			if(data._embedded.weatherDatas[i].stationName == indexName ){
 				$scope.specificStationData.push(data._embedded.weatherDatas[i]);
 			}
     	}
