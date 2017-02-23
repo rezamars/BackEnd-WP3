@@ -1,20 +1,42 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+
 <head>
-    <title>Spring Security Example </title>
+    <title>Login</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/sandstone/bootstrap.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 </head>
 <body>
-<div th:if="${param.error}">
-    Invalid username and password.
+<div class="container-fluid">
+    <div class="row text-center">
+        <div class="" th:if="${param.error}">
+            Invalid username and password.
+        </div>
+    </div>
+    <div class="row text-center">
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+    </div>
+
+    <form th:action="@{/login}" method="post">
+        <div class="row text-center">
+            <label> Username </label>
+        </div>
+        <div class="row text-center">
+            <input type="text" name="username"/>
+        </div>
+        <div class="row text-center">
+            <label> Password </label>
+        </div>
+        <div class="row text-center">
+            <input type="password" name="password"/>
+        </div>
+        <div class="row text-center">
+            <input type="submit" value="Sign In"/> <a th:href="@{/}"><input type="button" value="Home"/></a>
+        </div>
+    </form>
 </div>
-<div th:if="${param.logout}">
-    You have been logged out.
-</div>
-<form th:action="@{/login}" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Sign In"/> <a th:href="@{/}"><input type="button" value="Home"/></a></div>
-</form>
 </body>
 </html>
