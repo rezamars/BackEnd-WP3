@@ -9,34 +9,58 @@
 </head>
 <body>
 <div class="container-fluid">
-    <div class="row text-center">
-        <div class="" th:if="${param.error}">
-            Invalid username and password.
+    <div class="row">
+        <div class="col-md-12" style="height:200px;">
         </div>
     </div>
-    <div class="row text-center">
-        <div th:if="${param.logout}">
-            You have been logged out.
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="rounded border col-md-4" style="padding: 50px;">
+            <form th:action="@{/login}" method="post">
+                <div class="row text-center">
+                    <label> Username </label>
+                </div>
+                <div class="row text-center" style="padding-bottom: 5px">
+                    <input type="text" name="username"/>
+                </div>
+                <div class="row text-center">
+                    <label> Password </label>
+                </div>
+                <div class="row text-center">
+                    <input type="password" name="password"/>
+                </div>
+                <div class="row text-center" style="padding: 10px">
+                    <a><input type="submit" value="Sign In"/></a> <a th:href="@{/}"><input type="submit" value="Home"/></a>
+                </div>
+            </form>
         </div>
+        <div class="col-md-4"></div>
     </div>
+    <div class="row">
+        <div class="col-md-4">
 
-    <form th:action="@{/login}" method="post">
-        <div class="row text-center">
-            <label> Username </label>
         </div>
-        <div class="row text-center">
-            <input type="text" name="username"/>
+
+
+        <div class="col-md-4">
+            <div class="container-fluid">
+                <div class="row text-center">
+                    <div class="" th:if="${param.error}">
+                       <p class="text-danger">Invalid username and password.</p>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div th:if="${param.logout}">
+                        <p class="text-info">You have been logged out.</p>
+                    </div>
+                </div>
         </div>
-        <div class="row text-center">
-            <label> Password </label>
+
+
+        <div class="col-md-4">
+
         </div>
-        <div class="row text-center">
-            <input type="password" name="password"/>
-        </div>
-        <div class="row text-center">
-            <input type="submit" value="Sign In"/> <a th:href="@{/}"><input type="button" value="Home"/></a>
-        </div>
-    </form>
+    </div>
 </div>
 </body>
 </html>
