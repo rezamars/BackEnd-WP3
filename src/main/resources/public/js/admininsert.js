@@ -53,6 +53,19 @@ myWeatherApp.controller('mainController', function($scope,$http) {
     
     $scope.createData = function createData() {
     
+    	
+    	document.getElementById('temperature').style.backgroundColor = 'white';
+    	document.getElementById('humidity').style.backgroundColor = 'white';
+    	document.getElementById('wind').style.backgroundColor = 'white';
+    	document.getElementById('windDirection').style.backgroundColor = 'white';
+    	document.getElementById('cloudAltitude').style.backgroundColor = 'white';
+    	document.getElementById('cloudCoverage').style.backgroundColor = 'white';
+    	document.getElementById('cloudTypes').style.backgroundColor = 'white';
+    	document.getElementById('airPressure').style.backgroundColor = 'white';
+    	document.getElementById('precipitation').style.backgroundColor = 'white';
+    	
+    	
+    	
     	var smhiId = -1;
     	indexId = $scope.stationorg.length;
     	
@@ -65,30 +78,120 @@ myWeatherApp.controller('mainController', function($scope,$http) {
     	 
     	//an object to hold the new entries the admin types in admin-create page
     	var objToSaveInDB = $scope.stationorg[0];
+    	var okeyBoolean = true;
+    	var numbers = /^-?\d*\.{0,1}\d+$/;
+    	var cloudCoverageNumbers = /^[0-8]+$/;
+    	var letters = /^[A-Za-z]+$/;
     	
     	//get all the new values and store them
     	objToSaveInDB.smhiID = smhiId;
     	objToSaveInDB.stationName = indexName;
-    	objToSaveInDB.date = document.getElementById('date').value;
-    	objToSaveInDB.time = document.getElementById('time').value;
-    	objToSaveInDB.temperature = document.getElementById('temperature').value;
-    	objToSaveInDB.humidity = document.getElementById('humidity').value;
-    	objToSaveInDB.wind = document.getElementById('wind').value;
-    	objToSaveInDB.windDirection = document.getElementById('windDirection').value;
-    	objToSaveInDB.cloudAltitude = document.getElementById('cloudAltitude').value;
-    	objToSaveInDB.cloudCoverage = document.getElementById('cloudCoverage').value;
-    	objToSaveInDB.cloudTypes = document.getElementById('cloudTypes').value;
-    	objToSaveInDB.airPressure = document.getElementById('airPressure').value;
-    	objToSaveInDB.precipitation = document.getElementById('precipitation').value;
+    	objToSaveInDB.date = getDate();
+    	objToSaveInDB.time = getTime();
+    	var temperature = document.getElementById('temperature').value;
+    	if( temperature.match(numbers)){
+    		okeyBoolean = true;
+    	}
+    	else{
+    		okeyBoolean = false;
+    		document.getElementById('temperature').style.backgroundColor = 'red';
+    	}
+    	objToSaveInDB.temperature = temperature;
     	
-    	//post request to store the data in database
-    	$http.post(('/weatherDatas'),objToSaveInDB).success(function (data) {
-    		location.reload();
-    		alert('Successfully created new data!')
-            
-        }).error(function (status) {
-            alert(status);    
-     });
+    	var humidity = document.getElementById('humidity').value;
+    	if( humidity.match(numbers)){
+    		
+    	}
+    	else{
+    		okeyBoolean = false;
+    		document.getElementById('humidity').style.backgroundColor = 'red';
+    	}
+    	objToSaveInDB.humidity = humidity;
+    	
+    	var wind = document.getElementById('wind').value;
+    	if( wind.match(numbers)){
+    		
+    	}
+    	else{
+    		okeyBoolean = false;
+    		document.getElementById('wind').style.backgroundColor = 'red';
+    	}
+    	objToSaveInDB.wind = wind;
+    	
+    	var windDirection = document.getElementById('windDirection').value;
+    	if( windDirection.match(letters)){
+    		
+    	}
+    	else{
+    		okeyBoolean = false;
+    		document.getElementById('windDirection').style.backgroundColor = 'red';
+    	}
+    	objToSaveInDB.windDirection = windDirection;
+    	
+    	var cloudAltitude = document.getElementById('cloudAltitude').value;
+    	if( cloudAltitude.match(numbers)){
+    		
+    	}
+    	else{
+    		okeyBoolean = false;
+    		document.getElementById('cloudAltitude').style.backgroundColor = 'red';
+    	}
+    	objToSaveInDB.cloudAltitude = cloudAltitude;
+    	
+    	var cloudCoverage = document.getElementById('cloudCoverage').value;
+    	if( cloudCoverage.match(cloudCoverageNumbers)){
+    		
+    	}
+    	else{
+    		okeyBoolean = false;
+    		document.getElementById('cloudCoverage').style.backgroundColor = 'red';
+    	}
+    	objToSaveInDB.cloudCoverage = cloudCoverage;
+    	
+    	var cloudTypes = document.getElementById('cloudTypes').value;
+    	if( cloudTypes.match(letters)){
+    		
+    	}
+    	else{
+    		okeyBoolean = false;
+    		document.getElementById('cloudTypes').style.backgroundColor = 'red';
+    	}
+    	objToSaveInDB.cloudTypes = document.getElementById('cloudTypes').value;
+    	
+    	var airPressure = document.getElementById('airPressure').value;
+    	if( airPressure.match(numbers)){
+    		
+    	}
+    	else{
+    		okeyBoolean = false;
+    		document.getElementById('airPressure').style.backgroundColor = 'red';
+    	}
+    	objToSaveInDB.airPressure = airPressure;
+    	
+    	var precipitation = document.getElementById('precipitation').value;
+    	if( precipitation.match(numbers)){
+    		
+    	}
+    	else{
+    		okeyBoolean = false;
+    		document.getElementById('precipitation').style.backgroundColor = 'red';
+    	}
+    	objToSaveInDB.precipitation = precipitation;
+    	
+    	if(okeyBoolean == true){
+    		//post request to store the data in database
+        	$http.post(('/weatherDatas'),objToSaveInDB).success(function (data) {
+        		location.reload();
+        		alert('Successfully created new data!')
+                
+            }).error(function (status) {
+                alert(status);    
+         });
+    	}
+    	else{
+    		alert('Something wrong! Check your fields.');
+    	}
+    	
     	
     }
 });
