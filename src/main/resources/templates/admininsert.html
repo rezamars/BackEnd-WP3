@@ -17,7 +17,9 @@
 <body>
 <header>
     <h1>SMHI Admin Insert</h1>
-    <button class="btn btn-logout" type="logout">Logout</button>
+    <form th:action="@{/logout}" method="post">
+        <button class="btn btn-logout" type="logout" value="Sign Out">Logout</button>
+    </form>
     <div class="temp">
         <a th:href="@{/adminstart1}">
             <input class="btn btn-default" type="submit" value="Admin start"/>
