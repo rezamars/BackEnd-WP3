@@ -6,17 +6,36 @@ var indexId = -1;
 var indexDate = -1;
 var timePar2;
 var indexInJson = -1;
+var chosenDate;
 
 var myWeatherApp = angular.module('myWeatherApp', ['ngMaterial']);
 
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+
 myWeatherApp.controller('dateController', function($scope) {
-	myDate =  new Date;
+	
+	$scope.dateClicked = function (){
+		//alert(formatDate($scope.myDate));
+		chosenDate = formatDate($scope.myDate);
+	}
+	var myDate2 =  new Date;
 	$scope.maxDate = new Date(
-			myDate.getFullYear(), 
-			myDate.getMonth(), 
-			myDate.getDate());
+			myDate2.getFullYear(), 
+			myDate2.getMonth(), 
+			myDate2.getDate());
 			}).config(function($mdDateLocaleProvider) {
 				$mdDateLocaleProvider.firstDayOfWeek = 1;});
+	
 
 
 myWeatherApp.controller('mainController', function($scope,$http) {
@@ -140,7 +159,10 @@ function select1($scope,$http) {
 		
 		for(var i = 0 ; i<data._embedded.weatherDatas.length ; i++){
 			if(data._embedded.weatherDatas[i].stationName == indexName ){
-				$scope.specificStationData.push(data._embedded.weatherDatas[i]);
+				if(data._embedded.weatherDatas[i].date == chosenDate ){
+					$scope.specificStationData.push(data._embedded.weatherDatas[i]);
+				}
+				
 			}
     	}
 	

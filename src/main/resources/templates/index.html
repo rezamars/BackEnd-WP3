@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Homepage</title>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular-route.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
@@ -15,6 +15,8 @@
 
     <link href="css/index1.css" rel="stylesheet" type="text/css"/>
     <link href="css/animate.css" rel="stylesheet" type="text/css"/>
+    
+    
     <!-- Skapa tabell och sökfunktion med filtrering/sortering med checkbox-->
 
 </head>
@@ -36,7 +38,7 @@
     </form>
 
 
-    <div class="container" ng-app="sortApp" ng-controller="mainController">
+    <div class="container"  ng-controller="mainController">
 		
 		
 		
@@ -87,7 +89,7 @@
 		<input type = "checkbox" ng-model="hidePrecipitation" /> Hide Precipitation
 		</div>
         
-        <div style="height:500px;overflow:auto;">
+        <div >
             <table class="table table-bordered table-striped">
                 <thead>
                 <tr>
@@ -186,7 +188,7 @@
                 </thead>
 
                 <tbody>
-                <tr ng-repeat="station in stationDataList | orderBy:sortType:sortReverse | filter:searchInput ">
+                <tr ng-repeat="station in stationDataList |pagination:curPage * pageSize | limitTo: pageSize | orderBy:sortType:sortReverse | filter:searchInput ">
                     <td>{{ station.smhiID }}</td>
                     <td>{{ station.stationName }}</td>
                     <td ng-hide="hideDate">{{ station.date }}</td>
@@ -202,9 +204,26 @@
                     <td ng-hide="hidePrecipitation">{{ station.precipitation }} (mm/h)</td>
                 </tr>
                 </tbody>
-
+				
             </table>
+            
         </div>
+        <div class="pagination pagination-centered" ng-show="station.length">
+				<ul class="pagination-controle pagination">
+				 	<li>
+				  	<button type="button" class="btn btn-primary" ng-disabled="curPage == 0"
+				 	ng-click="curPage=curPage-1"> &lt; PREV</button>
+				 	</li>
+				 	<li>
+				 	<span>Page {{curPage + 1}} of {{ numberOfPages() }}</span>
+				 	</li>
+				 	<li>
+				 	<button type="button" class="btn btn-primary"
+				 	ng-disabled="curPage >= station.length/pageSize - 1"
+				 	ng-click="curPage = curPage+1">NEXT &gt;</button>
+				 </li>
+				</ul>
+			</div>
     </div>
 
 

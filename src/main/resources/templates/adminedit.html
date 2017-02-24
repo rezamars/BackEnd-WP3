@@ -69,18 +69,18 @@
 					</table>
 				</div>
 			</nav>
-
+			<article>
 			<div layout="column"  ng-controller="dateController" ng-cloak>
 				<h4>Pick a date</h4>
 				<md-datepicker 
 				ng-model="myDate" 
 				md-placeholder="Enter date"	
-				md-max-date="maxDate"></md-datepicker>
+				md-max-date="maxDate" ng-change="dateClicked()"></md-datepicker>
 				
-				<p> Selected date is {{ myDate  | date: 'yyyy-MM-dd'}}
-				<p> Selected date unprocessed {{ myDate }}
+				<!-- <p> Selected date is {{ myDate  | date: 'yyyy-MM-dd'}}
+				<p> Selected date unprocessed {{ myDate }} -->
 			</div>
-
+			</article>
 
 			<article>
 				<table class="table table-bordered table-striped">
